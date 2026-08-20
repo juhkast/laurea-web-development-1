@@ -1,24 +1,14 @@
 # Exercise 1 – HTML Basics
 
-## Task
+Create a simple webpage about your favourite animal.
 
-Create a simple HTML page containing:
+Your page should have:
 
-- A heading
-- A paragraph
-- An image
-- A link
-
-## Requirements
-
-Your page should:
-
-1. Use valid HTML5 structure.
-2. Include at least one heading.
-3. Include at least one paragraph.
-4. Include an image with meaningful alt text.
-5. Include a working link.
+- 🐾 A heading
+- ✍️ A short introduction about yourself
+- 🖼️ A picture of your favourite animal
+- 🔗 A link to learn more about it
 
 ## Submission
 
-Submit your work according to the instructions in Canvas.
+Push your work to GitHub and submit **your** repository link in Canvas.
