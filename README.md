@@ -8,11 +8,15 @@ This repository contains course materials, examples and exercises for Laurea Web
 
 ### Exercise 1 – HTML Basics
 
-Create a simple HTML page containing:
+Create a simple webpage about your favourite animal.
 
-- A heading
-- A paragraph
-- An image
-- A link
+Your page should have:
 
-Submit your work according to the instructions in Moodle.
+- 🐾 A heading
+- ✍️ A short introduction about yourself
+- 🖼️ A picture of your favourite imaginary animal
+- 🔗 A link to learn more about it
+
+## Submission
+
+Push your work to GitHub and submit the repository link in Canvas.
