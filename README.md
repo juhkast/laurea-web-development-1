@@ -19,4 +19,4 @@ Your page should have:
 
 ## Submission
 
-Push your work to GitHub and submit the repository link in Canvas.
+Push your work to GitHub and submit **your** repository link in Canvas.
