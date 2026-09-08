@@ -1,28 +1,42 @@
-body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
+/* Style the whole page */
 
-h1 {
-    color: darkblue;
-}
+    /* Set the font */
 
-p {
-    font-size: 18px;
-    line-height: 1.6;
-}
 
-img {
-    max-width: 100%;
-    border-radius: 12px;
-}
+    /* Limit the maximum width of the content */
 
-a {
-    color: darkgreen;
-}
 
-a:hover {
-    text-decoration: none;
-}
+    /* Center the page horizontally */
+
+
+    /* Add space inside the page */
+
+
+/* Style the main heading */
+
+    /* Change the text color */
+
+
+/* Style all paragraphs */
+
+    /* Set the text size */
+
+
+    /* Add space between lines of text */
+
+
+/* Style all images */
+
+    /* Prevent images from becoming wider than their container */
+
+
+    /* Round the corners of images */
+
+/* Style all links */
+
+    /* Change the link color */
+
+
+/* Style links when the mouse is over them */
+
+    /* Remove the underline */
