@@ -79,7 +79,7 @@ greetUser("John");
 
 Modify the function and test it with different names.
 
-## Bonus – Connect JavaScript to the Page
+## Exercise 6 – Button – Connect JavaScript to the Page
 
 Add a heading and a button to your HTML page.
 
