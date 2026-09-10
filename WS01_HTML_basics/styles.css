@@ -1,49 +1,5 @@
 /* Style the whole page */
 
-body {
-
-    font-family: Arial, sans-serif;
-     /* Limit the maximum width of the content */
-    max-width: 800px;
-      /* Center the page horizontally */
-    margin: 0 auto;
-        /* Add space inside the page */
-    padding: 20px;
-}
-
-h1 {
-    color: #087a47; /* Change the text color */
-    font-size: 36px; /* Set the text size */
-    margin-bottom: 20px; /* Add space below the heading */
-}
-
-
-p {
-    font-size: 18px; /* Set the text size */
-    line-height: 1.6; /* Add space between lines of text */
-    margin-bottom: 20px; /* Add space below each paragraph */
-}
-
-img {
-    max-width: 100%; /* Prevent images from becoming wider than their container */
-    border-radius: 10px; /* Round the corners of images */
-}
-   
-a {
-    color: #087a47; /* Change the link color */
-    text-decoration: none; /* Remove the underline */
-}
-
-a:hover {
-    text-decoration: underline; /* Add underline on hover */
-}
-
-  
-
-
-
-
-
 /* Style the main heading */
 
     /* Change the text color */
