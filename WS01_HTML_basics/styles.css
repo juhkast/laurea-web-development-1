@@ -1,11 +1,38 @@
 /* Style the whole page */
 
+body {
+    /* Set the font for the page */
+    font-family: arial, sans-serif;
+
+    max-width: 800px;
+
+    /* Set the background color */
+    background-color: #f0f0f0;
+
+    /* Add some padding around the content */
+    padding: 50px;
+
+    margin: 0 auto;
+}
+
 /* Style the main heading */
+
+h1 {
+    color: #348545;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;    
+}   
 
     /* Change the text color */
 
 
 /* Style all paragraphs */
+p {
+    color: #333333; 
+    font-size: 18px;
+    line-height: 1.6;
+}
 
     /* Set the text size */
 
@@ -15,6 +42,18 @@
 
 /* Style all images */
 
+img {
+
+    margin:auto
+
+    max-width: 100%;
+    width: 200px;
+    border-radius: 10px;
+    border-left: 5px solid #348545;
+    border-right: 5px solid #348545;
+    border-top: 5px solid #348545;
+    border-bottom: 5px solid #348545;
+}
     /* Prevent images from becoming wider than their container */
 
 
@@ -24,7 +63,15 @@
 
     /* Change the link color */
 
+a {
+    color: #2e530e;
+}
 
+a:hover {
+    color: #348545;
+    text-decoration: none;
+}
+'
 /* Style links when the mouse is over them */
 
     /* Remove the underline */
