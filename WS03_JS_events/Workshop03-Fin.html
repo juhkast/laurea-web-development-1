@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="utf-8">
+    <title>Työpaja 3</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body class="ws3">
+    <h1>Työpaja 3: JavaScript-tapahtumat</h1>
+    <hr>
+    <p>
+        Tässä työpajassa harjoitellaan JavaScript-tapahtumia.
+        Käytä materiaalia apuna ja tallenna koodi, jotta voit käyttää sitä myöhemmin.
+    </p>
+    <hr>
+
+    <!-- Harjoitus 1 -->
+    <h2>Harjoitus 1: Klikkaus</h2>
+    <p>Alla on kaksi painiketta. Lisää niihin <code>onclick</code>-tapahtumat.</p>
+    <p>Harjoituksessa 2 opit <code>addEventListener()</code>:n. Se on parempi tapa kuin kirjoittaminen suoraan HTML:ään.</p>
+
+    <p>
+        <button>Paina minua</button>
+        <button>Näytä eläintaulukko</button>
+    </p>
+
+    <div id="tableContainer"></div>
+
+    <ol>
+        <li>Ensimmäinen painike avaa ilmoitusikkunan: “You clicked me!”.</li>
+        <li>Toinen painike kutsuu funktiota <code>showTable()</code>, joka tekee HTML-taulukon sivulle.</li>
+        <li>Rakenna taulukko template string -muodossa. Käytä takaisinapostrofia: <code>`</code>.</li>
+        <li>Käytä muuttujia, esimerkiksi <code>${animal}</code>, <code>${habitat}</code> ja <code>${diet}</code>.</li>
+        <li>Kun taulukko toimii, etsi paikka sivulta <code>document.querySelector()</code>:lla ja lisää taulukko elementtiin, jonka id on <code>tableContainer</code>.</li>
+    </ol>
+
+    <table id="example" class="display">
+        <thead>
+            <tr>
+                <th>Eläin</th>
+                <th>Elinympäristö</th>
+                <th>Ruokavalio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tiikeri</td>
+                <td>Metsä</td>
+                <td>Liha</td>
+            </tr>
+            <tr>
+                <td>Norsu</td>
+                <td>Savanni</td>
+                <td>Kasvit</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- Harjoitus 2 -->
+    <h2>Harjoitus 2: Kuuntelijat ja DOM</h2>
+    <ul>
+        <li>Lisää <code>mouseover</code>-tapahtuma otsikolle “Harjoitus 2”. Tulosta teksti <em>“Stepped over me with a mouse!”</em> konsoliin.</li>
+        <li>Lisää <code>click</code>-tapahtuma otsikolle “Harjoitus 1” <code>addEventListener()</code>:llä. Muuta otsikon väri punaiseksi ja teksti muotoon “Bye bye mouse!”.</li>
+    </ul>
+    <p>Vihje: käytä <code>document.querySelector()</code> ja muuta sisältöä <code>innerHTML</code>:llä.</p>
+
+    <hr>
+
+    <!-- Harjoitus 3 -->
+    <h2>Harjoitus 3: Syöttötapahtumat</h2>
+    <p>
+        Käytä alla olevaa lomaketta harjoitellaksesi, miten sivu reagoi käyttäjän syötteeseen.
+        Tässä vaiheessa keskitytään vain syöttötapahtumiin. Älä tee vielä lomakkeen lähettämistä tai tarkistusta.
+    </p>
+
+    <ul>
+        <li>Lisää <strong>focus</strong>-tapahtuma <code>textarea</code>-kenttään. Se näyttää viestin <code>#status</code>-elementissä ja voi vaihtaa taustaväriä.</li>
+        <li>Lisää <strong>blur</strong>-tapahtuma, joka poistaa viestin ja palauttaa tyylit.</li>
+        <li>Lisää <strong>input</strong>-kuuntelija:
+            <ul>
+                <li>päivitä merkkimäärä <code>#charcount</code>-elementtiin (muodossa X/200)</li>
+                <li>päivitä esikatselu <code>#preview</code>-elementtiin</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Pika-palautelomake</h3>
+
+    <form id="feedbackForm" novalidate>
+        <label for="feedback">Palaute:</label><br>
+        <textarea id="feedback" placeholder="Kirjoita palautteesi..." rows="5"></textarea><br>
+
+        <div style="margin: 4px 0;">
+            <span id="charcount">0/200</span>
+            <span id="status" aria-live="polite" style="margin-left: 8px; color: #666;"></span>
+        </div>
+
+        <button id="sendBtn" type="submit">Lähetä</button>
+    </form>
+
+    <h3>Esikatselu</h3>
+    <div id="preview" style="border: 1px solid #ccc; padding: 8px; min-height: 40px; background: #fafafa;">
+        (Esikatselu tulee tähän)
+    </div>
+
+    <hr>
+
+    <!-- Harjoitus 4 -->
+    <h2>Harjoitus 4: Lomakkeen lähetys</h2>
+    <p>
+        Käytä samaa lomaketta. Nyt harjoitellaan lomakkeen lähetyksen käsittelyä ja tekstin pituuden tarkistamista.
+    </p>
+
+    <ul>
+        <li>Lisää <strong>submit</strong>-tapahtuma <code>#feedbackForm</code>-lomakkeeseen:
+            <ul>
+                <li>käytä <code>event.preventDefault()</code></li>
+                <li>tarkista, että palaute on 10–200 merkkiä pitkä</li>
+                <li>näytä virhe, jos pituus on väärä</li>
+                <li>jos palaute on ok, tyhjennä kenttä ja näytä “Thank you for your feedback!”</li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr>
+
+    <!-- Harjoitus 5 -->
+    <h2>Harjoitus 5: Näppäimistötapahtumat</h2>
+
+    <h3>Painetun näppäimen tunnistaminen</h3>
+
+    <p>
+        Tee ohjelma, joka näyttää viimeisen painetun näppäimen ja sen koodin.
+    </p>
+
+    <div id="keybox" style="padding: 20px; border: 1px solid #ccc; font-size: 1.2em;">
+        Paina mitä tahansa näppäintä...
+    </div>
+
+    <p id="keyinfo"></p>
+
+    <ul>
+        <li>Lisää <code>keydown</code>-kuuntelija dokumenttiin.</li>
+        <li>Tulosta tapahtuma ensin konsoliin.</li>
+        <li>Näytä:
+            <ul>
+                <li>painettu näppäin (<code>event.key</code>)</li>
+                <li>näppäinkoodi (<code>event.code</code>)</li>
+            </ul>
+            <code>#keyinfo</code>-elementissä.
+        </li>
+        <li>
+            Muuta <code>#keybox</code>-elementtiä niin, että se näyttää painetun näppäimen isolla fontilla.
+        </li>
+    </ul>
+
+    <h4>Bonustehtävä</h4>
+    <ul>
+        <li>Muuta taustaväriä näppäimen mukaan.</li>
+        <li>Lisää laskuri, joka näyttää, montako kertaa näppäintä on painettu.</li>
+        <li>Näytä, onko Shift-, Ctrl- vai Alt-näppäin painettuna.</li>
+    </ul>
+
+    <hr>
+
+    <!-- Bonusharjoitus -->
+    <h2>Bonusharjoitus: Google Maps ja sijainti</h2>
+
+    <h3>1. Google Maps ja koordinaatit</h3>
+    <p>
+        Voit avata Google Mapsin tietystä paikasta lisäämällä koordinaatit URL-osoitteeseen:
+    </p>
+    <code>https://www.google.com/maps?q=60.1699,24.9384</code>
+
+    <hr>
+
+    <h3>2. Käyttäjän sijainnin selvittäminen (Geolocation API)</h3>
+    <p>
+        Voit selvittää käyttäjän sijainnin JavaScriptin <strong>Geolocation API</strong>:n avulla.
+    </p>
+
+    <pre>
+navigator.geolocation.getCurrentPosition(
+    (position) => {
+        console.log("Latitude:", position.coords.latitude);
+        console.log("Longitude:", position.coords.longitude);
+    },
+    (error) => {
+        console.log("Sijaintia ei voitu hakea:", error.message);
+    }
+);
+    </pre>
+
+    <p>Kun koordinaatit ovat tiedossa, voit lähettää käyttäjän Google Mapsiin:</p>
+
+    <pre>
+const url = `https://www.google.com/maps?q=${lat},${lon}`;
+window.location.href = url;
+    </pre>
+
+    <p><em>Huomaa: sijainnin käyttäminen toimii yleensä vain HTTPS-sivuilla.</em></p>
+
+</body>
+</html>
