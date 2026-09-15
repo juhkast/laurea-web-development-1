@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Favourite Animal</title>
 
+    <script src="animal.js" defer></script>
    <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
 
-    <h1>My Favourite Animal!</h1>
+     <!-- 2.HTML defines the page. The browser creates the DOM, and JavaScript can use the DOM to read and change the page. -->
+    <h1 id="animalTitle">My Favourite Animal</h1>
 
     <p>
         Hi! My name is Juho and I am a lecturer in web development.
@@ -19,6 +21,27 @@
     </p>
 
     <img src="img/elefant_blend.png" alt="A blue elephant" >
+
+    <!-- 1.When the user clicks a button, show a message about the elephant. -->
+    <p><button id="animalButton">Click for Elephant </button></p>
+
+
+ <!-- 4.The input event happens every time the value changes.. -->
+
+  <h2>Choose another animal</h2>
+
+    
+
+
+     <!-- 5. Then a small form -->
+
+     <form id="animalForm">
+        <label for="animalInput">Type an animal:</label>
+        <input id="animalInput" type="text" placeholder="Type an animal">
+        <button type="submit">Submit</button>
+     </form>
+
+     <p id="animalOutput"></p>
 
     <p>
         <a href="https://en.wikipedia.org/wiki/Elephant" target="_blank">
