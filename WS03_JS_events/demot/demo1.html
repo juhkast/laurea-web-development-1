@@ -1,37 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Favourite Animal</title>
+
+
+    <!-- defer tells the browser to wait until the HTML has been parsed before running the JavaScript. -->
+    <script src="kuuntelijat.js" defer></script>
+
+
+    <link rel="stylesheet" href="styles2.css">
 </head>
-
-<script>
-    function myFunction() {
-        console.log("Hello world!")
-    }
-
-    (function callMyself() {
-        console.log("I called myself");
-    })()
-
-        (function () {
-            alert();
-        })()
-
-        (() => {
-            alert();
-        })()
-</script>
-
 <body>
-    <button>Click me</button>
-    <input></input>
-    <button>Nada</button>
 
-    <script src="kuuntelijat.js"></script>
+    <!-- 2.HTML defines the page. The browser creates the DOM, and JavaScript can use the DOM to read and change the page. -->
+    <h1 id="animalTitle">My Favourite Animal</h1>
+
+    <p>
+        Hi! My name is Juho and I am lecturer in web development.
+        My favourite animal is the blue elephant.
+    </p>
+
+   <img src="../img/elefant_blend.png" alt="A blue elephant" width="300">
+
+   <!-- 1.When the user clicks a button, show a message about the elephant. -->
+
+    <p><button id="animalButton">Show animal message</button></p>
+
+    <!-- 4.The input event happens every time the value changes.. -->
+
+    <h2>Choose another animal</h2>
+
+    <!--<input id="animalInput" type="text" placeholder="Type an animal">  -->
+
+    <br />
+
+    <!-- 5. Then a small form -->
+
+<form id="animalForm">
+    <label for="animalInput">Choose another animal:</label>
+    <input id="animalInput" type="text" placeholder="Type an animal">
+    <button type="submit">Submit</button>
+</form>
+
+<div id="animalTable" hidden>
+    <p>Elefantit ovat maailman suurimpia maaeläimiä.</p>
+</div>
+
+<p id="animalOutput"></p>
+
+<p id="animalOutput"></p>   
+        
+
+    <p>
+        <a href="https://en.wikipedia.org/wiki/Elephant" target="_blank">
+            Learn more about elephants
+        </a>
+    </p>
 
 </body>
-
 </html>
