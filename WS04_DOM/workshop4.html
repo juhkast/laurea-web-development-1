@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workshop 04 – DOM-skriptaus</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="mainHeading">Workshop 04 – Eläimet ja DOM</h1>
+
+        <p>
+            Tässä työpajassa harjoittelet HTML-elementtien valitsemista,
+            tapahtumien kuuntelemista ja DOM-rakenteen muuttamista.
+        </p>
+
+        <p>
+            <strong>Valitse → Kuuntele → Muuta DOMia</strong>
+        </p>
+    </header>
+
+    <main>
+        <!-- TEHTÄVÄ 1 -->
+        <section>
+            <h2 id="taskOneHeading">Tehtävä 1: Sisällön muuttaminen</h2>
+
+            <p>
+                Lisää painikkeisiin tapahtumankuuntelijat JavaScriptissä.
+                Käytä elementtien valitsemiseen
+                <code>document.querySelector()</code>-metodia.
+            </p>
+
+            <div class="buttons">
+                <button id="changeHeadingButton">
+                    Muuta otsikko
+                </button>
+
+                <button id="changeStyleButton">
+                    Muuta tyyliä
+                </button>
+
+                <button id="changeTextButton">
+                    Muuta eläinteksti
+                </button>
+            </div>
+
+            <div class="instructions">
+                <ol>
+                    <li>
+                        Ensimmäinen painike muuttaa Tehtävä 1 -otsikon tekstiksi
+                        <strong>Muokattu otsikko!</strong>
+                    </li>
+
+                    <li>
+                        Toinen painike lisää otsikolle CSS-luokan
+                        <code>highlight</code> tai poistaa sen.
+                        Käytä <code>classList.toggle()</code>-metodia.
+                    </li>
+
+                    <li>
+                        Kolmas painike vaihtaa alla olevan eläintekstin sisällön.
+                        Käytä <code>textContent</code>-ominaisuutta.
+                    </li>
+                </ol>
+            </div>
+
+            <p id="animalText">
+                Elefantit ovat maailman suurimpia maaeläimiä.
+            </p>
+
+            <h3>Bonustehtävät</h3>
+
+            <ul>
+                <li>
+                    Lisää eläintekstin loppuun uusi lause poistamatta
+                    alkuperäistä tekstiä.
+                </li>
+
+                <li>
+                    Lisää painike, joka vaihtaa koko sivun taustaväriä.
+                </li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- TEHTÄVÄ 2 -->
+        <section>
+            <h2>Tehtävä 2: Elementtien luominen JavaScriptillä</h2>
+
+            <p>
+                Luo tämän tehtävän elementit JavaScriptillä. Älä lisää niitä
+                suoraan HTML-koodiin.
+            </p>
+
+            <ol>
+                <li>
+                    Valitse alla oleva elementti, jonka tunniste on
+                    <code>animalContent</code>.
+                </li>
+
+                <li>
+                    Luo <code>h3</code>-elementti, jossa lukee
+                    <strong>Päivän eläin</strong>.
+                </li>
+
+                <li>
+                    Luo tekstikappale, jossa kerrotaan valitsemastasi eläimestä.
+                </li>
+
+                <li>
+                    Luo <code>img</code>-elementti ja määritä sille
+                    <code>src</code>- ja <code>alt</code>-arvot.
+                </li>
+
+                <li>
+                    Liitä luomasi elementit sivulle
+                    <code>append()</code>-metodilla.
+                </li>
+
+                <li>
+                    Lisää luodulle otsikolle CSS-luokka
+                    <code>animal-heading</code>.
+                </li>
+            </ol>
+
+            <div id="animalContent"></div>
+
+            <div class="buttons">
+                <button id="hideAnimalButton">
+                    Piilota eläin
+                </button>
+
+                <button id="showAnimalButton">
+                    Näytä eläin
+                </button>
+            </div>
+
+            <p>
+                Lisää painikkeisiin tapahtumankuuntelijat. Ensimmäinen painike
+                piilottaa <code>animalContent</code>-elementin ja toinen näyttää
+                sen uudelleen.
+            </p>
+        </section>
+
+        <hr>
+
+        <!-- TEHTÄVÄ 3 -->
+        <section>
+            <h2>Tehtävä 3: Eläimen valitseminen</h2>
+
+            <p>
+                Valitse eläin alasvetovalikosta. Muuta valinnan perusteella
+                eläimen nimi, kuva ja kuvausteksti.
+            </p>
+
+            <label for="animalSelect">Valitse eläin:</label>
+
+            <select id="animalSelect">
+                <option value="elephant">Elefantti</option>
+                <option value="tiger">Tiikeri</option>
+                <option value="penguin">Pingviini</option>
+                <option value="panda">Panda</option>
+            </select>
+
+            <article id="selectedAnimal">
+                <h3 id="animalName">Elefantti</h3>
+
+                <img
+                    id="animalImage"
+                    src="images/elephant.png"
+                    alt="Elefantti"
+                >
+
+                <p id="animalDescription">
+                    Elefantit ovat maailman suurimpia maaeläimiä.
+                </p>
+            </article>
+
+            <ol>
+                <li>
+                    Valitse alasvetovalikko
+                    <code>querySelector()</code>-metodilla.
+                </li>
+
+                <li>
+                    Lisää valikolle <code>change</code>-tapahtuman kuuntelija.
+                </li>
+
+                <li>
+                    Lue käyttäjän valinta valikon
+                    <code>value</code>-ominaisuudesta.
+                </li>
+
+                <li>
+                    Vaihda valinnan perusteella eläimen nimi, kuva,
+                    vaihtoehtoinen teksti ja kuvaus.
+                </li>
+
+                <li>
+                    Lisää kuvaan <code>mouseenter</code>-tapahtuma, joka lisää
+                    kuvalle CSS-luokan <code>image-highlight</code>.
+                </li>
+
+                <li>
+                    Lisää kuvaan <code>mouseleave</code>-tapahtuma, joka poistaa
+                    saman CSS-luokan.
+                </li>
+            </ol>
+        </section>
+
+        <hr>
+
+        <!-- TEHTÄVÄ 4 -->
+        <section>
+            <h2>Tehtävä 4: Eläinhavaintojen lisääminen</h2>
+
+            <p>
+                Lue lomakkeen kenttien arvot ja lisää uusi eläinhavainto
+                taulukkoon JavaScriptillä.
+            </p>
+
+            <form id="animalForm">
+                <div>
+                    <label for="observationAnimal">Eläin:</label>
+
+                    <input
+                        type="text"
+                        id="observationAnimal"
+                        name="observationAnimal"
+                    >
+                </div>
+
+                <div>
+                    <label for="observationLocation">Havaintopaikka:</label>
+
+                    <input
+                        type="text"
+                        id="observationLocation"
+                        name="observationLocation"
+                    >
+                </div>
+
+                <div>
+                    <label for="observationDate">Päivämäärä:</label>
+
+                    <input
+                        type="date"
+                        id="observationDate"
+                        name="observationDate"
+                    >
+                </div>
+
+                <button type="submit">
+                    Lisää havainto
+                </button>
+            </form>
+
+            <ol>
+                <li>
+                    Lisää lomakkeelle <code>submit</code>-tapahtuman kuuntelija.
+                </li>
+
+                <li>
+                    Estä lomakkeen oletustoiminto metodilla
+                    <code>event.preventDefault()</code>.
+                </li>
+
+                <li>
+                    Tarkista, etteivät kentät ole tyhjiä.
+                </li>
+
+                <li>
+                    Luo taulukkoon uusi <code>tr</code>-elementti.
+                </li>
+
+                <li>
+                    Luo jokaiselle arvolle oma <code>td</code>-elementti.
+                </li>
+
+                <li>
+                    Liitä uusi rivi taulukon <code>tbody</code>-elementtiin.
+                </li>
+            </ol>
+
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>Eläin</th>
+                        <th>Havaintopaikka</th>
+                        <th>Päivämäärä</th>
+                    </tr>
+                </thead>
+
+                <tbody id="observationTableBody">
+                    <tr>
+                        <td>Orava</td>
+                        <td>Puisto</td>
+                        <td>15.9.2026</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jänis</td>
+                        <td>Metsä</td>
+                        <td>18.9.2026</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Bonustehtävä</h3>
+
+            <p>
+                Lisää jokaiselle taulukkoriville painike, jolla kyseisen rivin
+                voi poistaa.
+            </p>
+        </section>
+
+        <hr>
+
+        <!-- BONUSTEHTÄVÄT -->
+        <section>
+            <h2>Bonustehtävät</h2>
+
+            <ol>
+                <li>
+                    Lisää painike, joka siirtää eläimen kuvaa sivulla.
+                </li>
+
+                <li>
+                    Tee kuvalle yksinkertainen animaatio CSS-luokan avulla.
+                </li>
+
+                <li>
+                    Lisää painike, joka häivyttää kuvan muuttamalla sille
+                    määritettyä CSS-luokkaa.
+                </li>
+
+                <li>
+                    Lisää painike, joka poistaa kuvan DOM-rakenteesta
+                    <code>remove()</code>-metodilla.
+                </li>
+
+                <li>
+                    Valitse kaikki sivun <code>li</code>-elementit metodilla
+                    <code>querySelectorAll()</code> ja käy ne läpi silmukalla.
+                </li>
+            </ol>
+        </section>
+    </main>
+</body>
+
+</html>

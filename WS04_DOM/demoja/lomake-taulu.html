@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lomake + LocalStorage</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Lisää rivejä lomakkeesta</h2>
+
+    <!-- Lomake nimien lisäämiseen -->
+    <form id="lomake">
+        Etunimi: <input type="text" id="etunimi" required>
+        Sukunimi: <input type="text" id="sukunimi" required>
+        <button type="submit">Lisää taulukkoon</button>
+    </form>
+
+    <!-- Nappi kaikkien tietojen tyhjentämiseen -->
+    <button id="tyhjenna">Tyhjennä kaikki</button>
+
+    <!-- Taulukko nimien näyttämiseen -->
+    <table id="taulukko">
+        <tr>
+            <th>Etunimi</th>
+            <th>Sukunimi</th>
+            <th>Toiminto</th>
+        </tr>
+    </table>
+
+    <!-- Lista tallennetuista nimistä LocalStoragesta -->
+    <h3>Tallennetut tiedot LocalStoragesta:</h3>
+    <ul id="tallennetut"></ul>
+
+    <script>
+        // Haetaan DOM-elementit
+        const lomake = document.getElementById("lomake");
+        const taulukko = document.getElementById("taulukko");
+        const tallennetut = document.getElementById("tallennetut");
+        const tyhjennaBtn = document.getElementById("tyhjenna");
+
+        // --- Hakee LocalStoragesta tallennetut henkilöt ---
+        function haeTallennetut() {
+            const data = localStorage.getItem("henkilot");
+            // Jos ei ole dataa, palautetaan tyhjä taulukko
+            return data ? JSON.parse(data) : [];
+        }
+
+        // --- Tallentaa henkilöt LocalStorageen ---
+        function tallenna(henkilot) {
+            localStorage.setItem("henkilot", JSON.stringify(henkilot));
+        }
+
+        // --- Näyttää tallennetut henkilöt listana ---
+        function naytaTallennetut() {
+            tallennetut.innerHTML = ""; // Tyhjennetään lista ennen uudelleenluontia
+            const henkilot = haeTallennetut();
+            for (let i = 0; i < henkilot.length; i++) {
+                const li = document.createElement("li");
+                li.textContent = henkilot[i].etunimi + " " + henkilot[i].sukunimi;
+                tallennetut.appendChild(li);
+            }
+        }
+
+        // --- Lisää rivi taulukkoon ---
+        function lisaaTaulukkoon(etunimi, sukunimi) {
+            const uusiRivi = taulukko.insertRow(-1); // Lisää rivin taulukon loppuun
+            const solu1 = uusiRivi.insertCell(0);
+            const solu2 = uusiRivi.insertCell(1);
+            const solu3 = uusiRivi.insertCell(2);
+
+            solu1.textContent = etunimi;
+            solu2.textContent = sukunimi;
+
+            // Poistonappi, joka poistaa rivin ja päivittää LocalStoragen
+            solu3.innerHTML = '<button onclick="poistaRivi(this)">Poista</button>';
+        }
+
+        // --- Poistaa rivin taulukosta ja LocalStoragesta ---
+        function poistaRivi(painike) {
+            const rivi = painike.parentNode.parentNode; // Saadaan taulukon rivi
+            const index = rivi.rowIndex - 1; // -1 koska otsikkorivi
+            const henkilot = haeTallennetut();
+
+            henkilot.splice(index, 1); // Poistetaan henkilö taulukosta
+            tallenna(henkilot);        // Päivitetään LocalStorage
+
+            taulukko.deleteRow(rivi.rowIndex); // Poistetaan HTML-taulukosta
+            naytaTallennetut();                // Päivitetään lista
+        }
+
+        // --- Lomakkeen lähetys ---
+        lomake.addEventListener("submit", function (e) {
+            e.preventDefault(); // Estetään lomakkeen oletustapahtuma (sivun lataus)
+
+            const etunimi = document.getElementById("etunimi").value;
+            const sukunimi = document.getElementById("sukunimi").value;
+
+            const henkilot = haeTallennetut();
+            henkilot.push({ etunimi, sukunimi }); // Lisätään uusi henkilö
+            tallenna(henkilot);
+
+            lisaaTaulukkoon(etunimi, sukunimi);
+            naytaTallennetut();
+
+            lomake.reset(); // Tyhjennetään lomake
+        });
+
+        // --- Tyhjennysnapin toiminto ---
+        tyhjennaBtn.addEventListener("click", function () {
+            localStorage.removeItem("henkilot"); // Poistetaan tallennettu data
+
+            // Tyhjennetään taulukko, mutta jätetään otsikkorivi
+            for (let i = taulukko.rows.length - 1; i > 0; i--) {
+                taulukko.deleteRow(i);
+            }
+
+            // Tyhjennetään lista
+            while (tallennetut.firstChild) {
+                tallennetut.removeChild(tallennetut.firstChild);
+            }
+        });
+
+        // --- Kun sivu ladataan, näytetään tallennetut tiedot ---
+        window.onload = function () {
+            const henkilot = haeTallennetut();
+            for (let i = 0; i < henkilot.length; i++) {
+                lisaaTaulukkoon(henkilot[i].etunimi, henkilot[i].sukunimi);
+            }
+            naytaTallennetut();
+        };
+    </script>
+</body>
+
+</html>

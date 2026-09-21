@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workshop 04 – DOM Scripting</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="mainHeading">Workshop 04 – Animals and the DOM</h1>
+
+        <p>
+            In this workshop, you will practise selecting HTML elements,
+            listening for events and changing the DOM.
+        </p>
+
+        <p>
+            <strong>Select → Listen → Change the DOM</strong>
+        </p>
+    </header>
+
+    <main>
+        <!-- TASK 1 -->
+        <section>
+            <h2 id="taskOneHeading">Task 1: Changing content</h2>
+
+            <p>
+                Add event listeners to the buttons in JavaScript.
+                Use <code>document.querySelector()</code> to select the elements.
+            </p>
+
+            <div class="buttons">
+                <button id="changeHeadingButton">
+                    Change heading
+                </button>
+
+                <button id="changeStyleButton">
+                    Change style
+                </button>
+
+                <button id="changeTextButton">
+                    Change animal text
+                </button>
+            </div>
+
+            <div class="instructions">
+                <ol>
+                    <li>
+                        The first button changes the Task 1 heading to
+                        <strong>Updated heading!</strong>
+                    </li>
+
+                    <li>
+                        The second button adds or removes the CSS class
+                        <code>highlight</code> from the heading.
+                        Use <code>classList.toggle()</code>.
+                    </li>
+
+                    <li>
+                        The third button changes the animal text below.
+                        Use the <code>textContent</code> property.
+                    </li>
+                </ol>
+            </div>
+
+            <p id="animalText">
+                Elephants are the world's largest land animals.
+            </p>
+
+            <h3>Bonus tasks</h3>
+
+            <ul>
+                <li>
+                    Add a new sentence to the end of the animal text without
+                    replacing the existing text.
+                </li>
+
+                <li>
+                    Add a button that changes the background colour of the page.
+                </li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- TASK 2 -->
+        <section>
+            <h2>Task 2: Creating elements with JavaScript</h2>
+
+            <p>
+                Create the elements for this task with JavaScript. Do not add
+                them directly to the HTML.
+            </p>
+
+            <ol>
+                <li>
+                    Select the element below with the ID
+                    <code>animalContent</code>.
+                </li>
+
+                <li>
+                    Create an <code>h3</code> element containing the text
+                    <strong>Animal of the Day</strong>.
+                </li>
+
+                <li>
+                    Create a paragraph describing an animal of your choice.
+                </li>
+
+                <li>
+                    Create an <code>img</code> element and set its
+                    <code>src</code> and <code>alt</code> values.
+                </li>
+
+                <li>
+                    Attach the elements to the page with
+                    <code>append()</code>.
+                </li>
+
+                <li>
+                    Add the CSS class <code>animal-heading</code> to the
+                    heading you created.
+                </li>
+            </ol>
+
+            <div id="animalContent"></div>
+
+            <div class="buttons">
+                <button id="hideAnimalButton">
+                    Hide animal
+                </button>
+
+                <button id="showAnimalButton">
+                    Show animal
+                </button>
+            </div>
+
+            <p>
+                Add event listeners to the buttons. The first button hides the
+                <code>animalContent</code> element and the second button shows
+                it again.
+            </p>
+        </section>
+
+        <hr>
+
+        <!-- TASK 3 -->
+        <section>
+            <h2>Task 3: Selecting an animal</h2>
+
+            <p>
+                Select an animal from the drop-down menu. Change the animal's
+                name, image and description based on the selection.
+            </p>
+
+            <label for="animalSelect">Select an animal:</label>
+
+            <select id="animalSelect">
+                <option value="elephant">Elephant</option>
+                <option value="tiger">Tiger</option>
+                <option value="penguin">Penguin</option>
+                <option value="panda">Panda</option>
+            </select>
+
+            <article id="selectedAnimal">
+                <h3 id="animalName">Elephant</h3>
+
+                <img
+                    id="animalImage"
+                    src="images/elephant.png"
+                    alt="Elephant"
+                >
+
+                <p id="animalDescription">
+                    Elephants are the world's largest land animals.
+                </p>
+            </article>
+
+            <ol>
+                <li>
+                    Select the drop-down menu with
+                    <code>querySelector()</code>.
+                </li>
+
+                <li>
+                    Add a listener for the <code>change</code> event.
+                </li>
+
+                <li>
+                    Read the user's selection from the menu's
+                    <code>value</code> property.
+                </li>
+
+                <li>
+                    Change the animal's name, image, alternative text and
+                    description based on the selection.
+                </li>
+
+                <li>
+                    Add a <code>mouseenter</code> event listener to the image.
+                    It should add the CSS class <code>image-highlight</code>.
+                </li>
+
+                <li>
+                    Add a <code>mouseleave</code> event listener that removes
+                    the same CSS class.
+                </li>
+            </ol>
+        </section>
+
+        <hr>
+
+        <!-- TASK 4 -->
+        <section>
+            <h2>Task 4: Adding animal observations</h2>
+
+            <p>
+                Read the values from the form fields and add a new animal
+                observation to the table with JavaScript.
+            </p>
+
+            <form id="animalForm">
+                <div>
+                    <label for="observationAnimal">Animal:</label>
+
+                    <input
+                        type="text"
+                        id="observationAnimal"
+                        name="observationAnimal"
+                    >
+                </div>
+
+                <div>
+                    <label for="observationLocation">Location:</label>
+
+                    <input
+                        type="text"
+                        id="observationLocation"
+                        name="observationLocation"
+                    >
+                </div>
+
+                <div>
+                    <label for="observationDate">Date:</label>
+
+                    <input
+                        type="date"
+                        id="observationDate"
+                        name="observationDate"
+                    >
+                </div>
+
+                <button type="submit">
+                    Add observation
+                </button>
+            </form>
+
+            <ol>
+                <li>
+                    Add a listener for the form's <code>submit</code> event.
+                </li>
+
+                <li>
+                    Prevent the form's default action with
+                    <code>event.preventDefault()</code>.
+                </li>
+
+                <li>
+                    Check that none of the fields are empty.
+                </li>
+
+                <li>
+                    Create a new <code>tr</code> element for the table.
+                </li>
+
+                <li>
+                    Create a separate <code>td</code> element for each value.
+                </li>
+
+                <li>
+                    Attach the new row to the table's <code>tbody</code> element.
+                </li>
+            </ol>
+
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>Animal</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody id="observationTableBody">
+                    <tr>
+                        <td>Squirrel</td>
+                        <td>Park</td>
+                        <td>15 September 2026</td>
+                    </tr>
+
+                    <tr>
+                        <td>Hare</td>
+                        <td>Forest</td>
+                        <td>18 September 2026</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Bonus task</h3>
+
+            <p>
+                Add a button to each table row that removes that row.
+            </p>
+        </section>
+
+        <hr>
+
+        <!-- BONUS TASKS -->
+        <section>
+            <h2>Bonus tasks</h2>
+
+            <ol>
+                <li>
+                    Add a button that moves the animal image on the page.
+                </li>
+
+                <li>
+                    Create a simple animation for the image with a CSS class.
+                </li>
+
+                <li>
+                    Add a button that fades out the image by changing its
+                    CSS class.
+                </li>
+
+                <li>
+                    Add a button that removes the image from the DOM with
+                    <code>remove()</code>.
+                </li>
+
+                <li>
+                    Select all <code>li</code> elements with
+                    <code>querySelectorAll()</code> and loop through them.
+                </li>
+            </ol>
+        </section>
+    </main>
+</body>
+
+</html>
