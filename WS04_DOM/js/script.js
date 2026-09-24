@@ -1,3 +1,13 @@
+// MOKATAAN OTSIKKOA KUN NAPPIA PAINETAAN
+// MOKATAAN OTSIKKOA KUN NAPPIA PAINETAAN
+const changeHeadingButton = document.querySelector("#changeHeadingButton");
+const taskOneHeading = document.querySelector("#taskOneHeading");
+
+changeHeadingButton.addEventListener("click", function () {
+    taskOneHeading.textContent = "Muokattu otsikko!";
+});
+
+
 // -------------------------------------------------- EXAMPLE 1 ANIMAL TABLE
 // -------------------------------------------------- EXAMPLE 1 ANIMAL TABLE
 
