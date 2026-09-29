@@ -66,7 +66,7 @@ Lisää tähän vähintään yksi kuvakaappaus toimivasta sovelluksestasi.
 
 Esimerkki kuvan lisäämisestä:
 
-`![Kuvakaappaus sovelluksesta](images/screenshot.png)`
+![Kuvakaappaus sovelluksesta](img/screenshot.png)
 
 ## Tunnetut virheet / puutteet
 
