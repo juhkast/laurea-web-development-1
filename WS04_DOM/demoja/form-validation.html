@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Form Validation</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <h1>Name List</h1>
+
+    <form id="nameForm">
+        <label for="name">Name:</label>
+
+        <!-- HTML5 VALIDATION: The field is required -->
+        <input type="text" id="name" required>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <p id="errorMessage"></p>
+
+    <ul id="nameList"></ul>
+</body>
+
+</html>

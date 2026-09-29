@@ -1,9 +1,22 @@
+<!--
+    HUOMIO:
+    Tässä esimerkissä HTML, CSS ja JavaScript ovat samassa tiedostossa,
+    jotta esimerkkiä olisi helpompi lukea ja esitellä.
+
+    Projekti 1:ssä CSS- ja JavaScript-koodi tulee sijoittaa erillisiin
+    ulkoisiin tiedostoihin:
+
+    index.html
+    css/style.css
+    js/script.js
+-->
 <!DOCTYPE html>
 <html lang="fi">
 
 <head>
     <meta charset="UTF-8">
     <title>Lomake + LocalStorage</title>
+
     <style>
         table,
         th,
@@ -20,6 +33,12 @@
         button {
             margin-left: 5px;
         }
+
+        /* VALIDOINTI 5:
+           Tämä luokka korostaa virheellisen kentän punaisella reunuksella. */
+        .virheellinen {
+            border: 2px solid red;
+        }
     </style>
 </head>
 
@@ -28,8 +47,18 @@
 
     <!-- Lomake nimien lisäämiseen -->
     <form id="lomake">
-        Etunimi: <input type="text" id="etunimi" required>
-        Sukunimi: <input type="text" id="sukunimi" required>
+
+        <!-- VALIDOINTI 1 – HTML5:
+             required estää lomakkeen lähettämisen, jos kenttä on tyhjä.
+             Selain näyttää automaattisesti oman virheilmoituksensa. -->
+        <label for="etunimi">Etunimi:</label>
+        <input type="text" id="etunimi" required>
+
+        <!-- VALIDOINTI 1 – HTML5:
+             Myös sukunimi on pakollinen kenttä. -->
+        <label for="sukunimi">Sukunimi:</label>
+        <input type="text" id="sukunimi" required>
+
         <button type="submit">Lisää taulukkoon</button>
     </form>
 
@@ -56,10 +85,15 @@
         const tallennetut = document.getElementById("tallennetut");
         const tyhjennaBtn = document.getElementById("tyhjenna");
 
+        // Haetaan lomakkeen kentät valmiiksi muuttujiin
+        const etunimiKentta = document.getElementById("etunimi");
+        const sukunimiKentta = document.getElementById("sukunimi");
+
         // --- Hakee LocalStoragesta tallennetut henkilöt ---
         function haeTallennetut() {
             const data = localStorage.getItem("henkilot");
-            // Jos ei ole dataa, palautetaan tyhjä taulukko
+
+            // Jos dataa ei ole, palautetaan tyhjä taulukko
             return data ? JSON.parse(data) : [];
         }
 
@@ -70,18 +104,26 @@
 
         // --- Näyttää tallennetut henkilöt listana ---
         function naytaTallennetut() {
-            tallennetut.innerHTML = ""; // Tyhjennetään lista ennen uudelleenluontia
+            // Tyhjennetään lista ennen sen luomista uudelleen
+            tallennetut.innerHTML = "";
+
             const henkilot = haeTallennetut();
+
             for (let i = 0; i < henkilot.length; i++) {
                 const li = document.createElement("li");
-                li.textContent = henkilot[i].etunimi + " " + henkilot[i].sukunimi;
+
+                li.textContent =
+                    henkilot[i].etunimi + " " + henkilot[i].sukunimi;
+
                 tallennetut.appendChild(li);
             }
         }
 
-        // --- Lisää rivi taulukkoon ---
+        // --- Lisää rivin taulukkoon ---
         function lisaaTaulukkoon(etunimi, sukunimi) {
-            const uusiRivi = taulukko.insertRow(-1); // Lisää rivin taulukon loppuun
+            // Lisätään uusi rivi taulukon loppuun
+            const uusiRivi = taulukko.insertRow(-1);
+
             const solu1 = uusiRivi.insertCell(0);
             const solu2 = uusiRivi.insertCell(1);
             const solu3 = uusiRivi.insertCell(2);
@@ -89,43 +131,107 @@
             solu1.textContent = etunimi;
             solu2.textContent = sukunimi;
 
-            // Poistonappi, joka poistaa rivin ja päivittää LocalStoragen
-            solu3.innerHTML = '<button onclick="poistaRivi(this)">Poista</button>';
+            // Poistonappi poistaa rivin ja päivittää LocalStoragen
+            solu3.innerHTML =
+                '<button onclick="poistaRivi(this)">Poista</button>';
         }
 
         // --- Poistaa rivin taulukosta ja LocalStoragesta ---
         function poistaRivi(painike) {
-            const rivi = painike.parentNode.parentNode; // Saadaan taulukon rivi
-            const index = rivi.rowIndex - 1; // -1 koska otsikkorivi
+            // Haetaan painikkeen sisältävä taulukon rivi
+            const rivi = painike.parentNode.parentNode;
+
+            // Vähennetään yksi, koska ensimmäinen rivi on otsikkorivi
+            const index = rivi.rowIndex - 1;
+
             const henkilot = haeTallennetut();
 
-            henkilot.splice(index, 1); // Poistetaan henkilö taulukosta
-            tallenna(henkilot);        // Päivitetään LocalStorage
+            // Poistetaan henkilö JavaScript-taulukosta
+            henkilot.splice(index, 1);
 
-            taulukko.deleteRow(rivi.rowIndex); // Poistetaan HTML-taulukosta
-            naytaTallennetut();                // Päivitetään lista
+            // Päivitetään LocalStorage
+            tallenna(henkilot);
+
+            // Poistetaan rivi HTML-taulukosta
+            taulukko.deleteRow(rivi.rowIndex);
+
+            // Päivitetään tallennettujen henkilöiden lista
+            naytaTallennetut();
         }
 
         // --- Lomakkeen lähetys ---
         lomake.addEventListener("submit", function (e) {
-            e.preventDefault(); // Estetään lomakkeen oletustapahtuma (sivun lataus)
+            // Estetään lomakkeen oletustoiminto eli sivun lataaminen uudelleen
+            e.preventDefault();
 
-            const etunimi = document.getElementById("etunimi").value;
-            const sukunimi = document.getElementById("sukunimi").value;
+            // VALIDOINTI 2 – AIKAISEMPIEN VIRHEIDEN POISTAMINEN:
+            // Poistetaan punaiset reunukset ennen uutta tarkistusta.
+            etunimiKentta.classList.remove("virheellinen");
+            sukunimiKentta.classList.remove("virheellinen");
 
+            // VALIDOINTI 3 – SYÖTTEIDEN SIISTIMINEN:
+            // trim() poistaa alusta ja lopusta ylimääräiset välilyönnit.
+            // Näin esimerkiksi pelkkiä välilyöntejä ei hyväksytä nimeksi.
+            const etunimi = etunimiKentta.value.trim();
+            const sukunimi = sukunimiKentta.value.trim();
+
+            // VALIDOINTI 4 – ETUNIMEN TARKISTAMINEN:
+            // Etunimessä täytyy olla vähintään kaksi merkkiä.
+            if (etunimi.length < 2) {
+                // VALIDOINTI 5 – VIRHEEN KOROSTAMINEN:
+                // Lisätään kentälle punainen reunus.
+                etunimiKentta.classList.add("virheellinen");
+
+                alert("Etunimen pitää sisältää vähintään 2 merkkiä.");
+
+                // Siirretään kohdistus virheelliseen kenttään
+                etunimiKentta.focus();
+
+                // Keskeytetään funktion suorittaminen
+                return;
+            }
+
+            // VALIDOINTI 4 – SUKUNIMEN TARKISTAMINEN:
+            // Sukunimessä täytyy olla vähintään kaksi merkkiä.
+            if (sukunimi.length < 2) {
+                // VALIDOINTI 5 – VIRHEEN KOROSTAMINEN
+                sukunimiKentta.classList.add("virheellinen");
+
+                alert("Sukunimen pitää sisältää vähintään 2 merkkiä.");
+
+                // Siirretään kohdistus virheelliseen kenttään
+                sukunimiKentta.focus();
+
+                // Keskeytetään funktion suorittaminen
+                return;
+            }
+
+            // Tähän päästään vain, jos molemmat kentät ovat kelvollisia
             const henkilot = haeTallennetut();
-            henkilot.push({ etunimi, sukunimi }); // Lisätään uusi henkilö
+
+            // Lisätään uusi henkilö JavaScript-taulukkoon
+            henkilot.push({
+                etunimi: etunimi,
+                sukunimi: sukunimi
+            });
+
+            // Tallennetaan päivitetty taulukko LocalStorageen
             tallenna(henkilot);
 
+            // Näytetään henkilö HTML-taulukossa
             lisaaTaulukkoon(etunimi, sukunimi);
+
+            // Päivitetään LocalStorage-tietoja näyttävä lista
             naytaTallennetut();
 
-            lomake.reset(); // Tyhjennetään lomake
+            // Tyhjennetään lomakkeen kentät
+            lomake.reset();
         });
 
         // --- Tyhjennysnapin toiminto ---
         tyhjennaBtn.addEventListener("click", function () {
-            localStorage.removeItem("henkilot"); // Poistetaan tallennettu data
+            // Poistetaan tallennettu data LocalStoragesta
+            localStorage.removeItem("henkilot");
 
             // Tyhjennetään taulukko, mutta jätetään otsikkorivi
             for (let i = taulukko.rows.length - 1; i > 0; i--) {
@@ -136,14 +242,23 @@
             while (tallennetut.firstChild) {
                 tallennetut.removeChild(tallennetut.firstChild);
             }
+
+            // Poistetaan mahdolliset validoinnin korostukset
+            etunimiKentta.classList.remove("virheellinen");
+            sukunimiKentta.classList.remove("virheellinen");
         });
 
         // --- Kun sivu ladataan, näytetään tallennetut tiedot ---
         window.onload = function () {
             const henkilot = haeTallennetut();
+
             for (let i = 0; i < henkilot.length; i++) {
-                lisaaTaulukkoon(henkilot[i].etunimi, henkilot[i].sukunimi);
+                lisaaTaulukkoon(
+                    henkilot[i].etunimi,
+                    henkilot[i].sukunimi
+                );
             }
+
             naytaTallennetut();
         };
     </script>

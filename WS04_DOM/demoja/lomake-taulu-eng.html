@@ -1,0 +1,266 @@
+<!--
+    NOTE:
+    In this example, the HTML, CSS and JavaScript are included in the same file
+    to make the example easier to read and demonstrate.
+
+    In Project 1, the CSS and JavaScript must be placed in separate external files:
+
+    index.html
+    css/style.css
+    js/script.js
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form + LocalStorage</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+
+        /* VALIDATION 5: This class highlights an invalid field with a red border. */
+        .invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Add rows using a form</h2>
+
+    <!-- Form for adding names -->
+    <form id="nameForm">
+
+        <!-- VALIDATION 1 – HTML5:
+             The required attribute prevents the form from being submitted
+             if the field is empty.
+             The browser automatically displays its own error message. -->
+        <label for="firstName">First name:</label>
+        <input type="text" id="firstName" required>
+
+        <!-- VALIDATION 1 – HTML5:
+             The last name is also a required field. -->
+        <label for="lastName">Last name:</label>
+        <input type="text" id="lastName" required>
+
+        <button type="submit">Add to table</button>
+    </form>
+
+    <!-- Button for removing all saved data -->
+    <button id="clearAll">Clear all</button>
+
+    <!-- Table for displaying names -->
+    <table id="nameTable">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
+    <!-- List of names saved in LocalStorage -->
+    <h3>Data saved in LocalStorage:</h3>
+    <ul id="savedNames"></ul>
+
+    <script>
+        // Get the DOM elements
+        const nameForm = document.getElementById("nameForm");
+        const nameTable = document.getElementById("nameTable");
+        const savedNames = document.getElementById("savedNames");
+        const clearAllButton = document.getElementById("clearAll");
+
+        // Store the form fields in variables
+        const firstNameField = document.getElementById("firstName");
+        const lastNameField = document.getElementById("lastName");
+
+        // --- Gets the saved people from LocalStorage ---
+        function getSavedPeople() {
+            const data = localStorage.getItem("people");
+
+            // If there is no saved data, return an empty array
+            return data ? JSON.parse(data) : [];
+        }
+
+        // --- Saves the people to LocalStorage ---
+        function savePeople(people) {
+            localStorage.setItem("people", JSON.stringify(people));
+        }
+
+        // --- Displays the saved people as a list ---
+        function displaySavedPeople() {
+            // Clear the list before creating it again
+            savedNames.innerHTML = "";
+
+            const people = getSavedPeople();
+
+            for (let i = 0; i < people.length; i++) {
+                const listItem = document.createElement("li");
+
+                listItem.textContent =
+                    people[i].firstName + " " + people[i].lastName;
+
+                savedNames.appendChild(listItem);
+            }
+        }
+
+        // --- Adds a row to the table ---
+        function addToTable(firstName, lastName) {
+            // Add a new row to the end of the table
+            const newRow = nameTable.insertRow(-1);
+
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+
+            cell1.textContent = firstName;
+            cell2.textContent = lastName;
+
+            // The delete button removes the row and updates LocalStorage
+            cell3.innerHTML =
+                '<button onclick="removeRow(this)">Delete</button>';
+        }
+
+        // --- Removes a row from the table and LocalStorage ---
+        function removeRow(button) {
+            // Get the table row containing the button
+            const row = button.parentNode.parentNode;
+
+            // Subtract one because the first row contains the headings
+            const index = row.rowIndex - 1;
+
+            const people = getSavedPeople();
+
+            // Remove the person from the JavaScript array
+            people.splice(index, 1);
+
+            // Update LocalStorage
+            savePeople(people);
+
+            // Remove the row from the HTML table
+            nameTable.deleteRow(row.rowIndex);
+
+            // Update the list of saved people
+            displaySavedPeople();
+        }
+
+        // --- Form submission ---
+        nameForm.addEventListener("submit", function (event) {
+            // Prevent the default form action and page reload
+            event.preventDefault();
+
+            // VALIDATION 2 – REMOVE PREVIOUS ERRORS:
+            // Remove the red borders before performing a new validation.
+            firstNameField.classList.remove("invalid");
+            lastNameField.classList.remove("invalid");
+
+            // VALIDATION 3 – CLEAN THE INPUT:
+            // trim() removes extra spaces from the beginning and end.
+            // This prevents the user from entering only spaces as a name.
+            const firstName = firstNameField.value.trim();
+            const lastName = lastNameField.value.trim();
+
+            // VALIDATION 4 – CHECK THE FIRST NAME:
+            // The first name must contain at least two characters.
+            if (firstName.length < 2) {
+                // VALIDATION 5 – HIGHLIGHT THE ERROR:
+                // Add a red border to the invalid field.
+                firstNameField.classList.add("invalid");
+
+                alert("The first name must contain at least 2 characters.");
+
+                // Move the focus to the invalid field
+                firstNameField.focus();
+
+                // Stop the function
+                return;
+            }
+
+            // VALIDATION 4 – CHECK THE LAST NAME:
+            // The last name must contain at least two characters.
+            if (lastName.length < 2) {
+                // VALIDATION 5 – HIGHLIGHT THE ERROR
+                lastNameField.classList.add("invalid");
+
+                alert("The last name must contain at least 2 characters.");
+
+                // Move the focus to the invalid field
+                lastNameField.focus();
+
+                // Stop the function
+                return;
+            }
+
+            // The code reaches this point only if both fields are valid
+            const people = getSavedPeople();
+
+            // Add a new person to the JavaScript array
+            people.push({
+                firstName: firstName,
+                lastName: lastName
+            });
+
+            // Save the updated array to LocalStorage
+            savePeople(people);
+
+            // Display the person in the HTML table
+            addToTable(firstName, lastName);
+
+            // Update the list showing the LocalStorage data
+            displaySavedPeople();
+
+            // Clear the form fields
+            nameForm.reset();
+        });
+
+        // --- Clear all button ---
+        clearAllButton.addEventListener("click", function () {
+            // Remove the saved data from LocalStorage
+            localStorage.removeItem("people");
+
+            // Clear the table but keep the heading row
+            for (let i = nameTable.rows.length - 1; i > 0; i--) {
+                nameTable.deleteRow(i);
+            }
+
+            // Clear the list
+            while (savedNames.firstChild) {
+                savedNames.removeChild(savedNames.firstChild);
+            }
+
+            // Remove possible validation highlights
+            firstNameField.classList.remove("invalid");
+            lastNameField.classList.remove("invalid");
+        });
+
+        // --- Display the saved data when the page loads ---
+        window.onload = function () {
+            const people = getSavedPeople();
+
+            for (let i = 0; i < people.length; i++) {
+                addToTable(
+                    people[i].firstName,
+                    people[i].lastName
+                );
+            }
+
+            displaySavedPeople();
+        };
+    </script>
+</body>
+
+</html>
