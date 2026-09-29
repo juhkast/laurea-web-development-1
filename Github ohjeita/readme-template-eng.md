@@ -1,54 +1,113 @@
-# Project Title 
-The name of the Project and all authors involved
+# Project name
 
-## Demo link:
-Access my site at [google.com](https://google.com)
+**Author(s):** Write your name / the names of all authors here
 
-## How was the workload divided
-How was the workload divided. Who did what? 
+## Project plan
 
+### Project idea
 
+Briefly describe what your application does and who it is intended for.
 
-## Table of Content:
+### Planned features
 
-- [About The App](#about-the-app)
-- [Screenshots](#screenshots)
-- [Technologies](#technologies)
-- [Setup](#setup)
-- [Approach](#approach)
-- [Status](#status)
-- [Credits](#credits)
-- [License](#license)
+List at least three features you plan to include in your application:
 
-## About The App
-[Name of project] is an app that ...
+- Feature 1
+- Feature 2
+- Feature 3
 
-## Screenshots
-Add here atleast one screenshot of the working application 
-`![Writing](https://unsplash.com/photos/VBPzRgd7gfc)`
+### Wireframe / sketch
 
-Picture by [Kelly Sikkema](https://unsplash.com/@kellysikkema)
+Add an image of your hand-drawn or digitally created application wireframe here. The wireframe should show the main view and the most important elements of your application.
+
+Example:
+
+![Wireframe](img/wireframe.png)
+
+## Web links
+
+- **Published application:** [Add your GitHub Pages URL here](https://yourusername.github.io/your-repository/)
+- **GitHub repository:** [Add your repository URL here](https://github.com/yourusername/your-repository)
+- **Project video presentation:** [Add your video URL here](https://example.com/)
+
+## About the application
+
+**[Project name]** is a web application that ...
+
+Briefly describe the purpose of your application and its main features.
 
 ## Technologies
-Describe which technologies were used and the role of each in your project. 
-I used the following technologies `html`, `css`, ...
 
-## Setup
-Write brief instructions on how to run and use your app. For example:
-- download all the files and open index.html in your browser
-- download or clone the repository
-- run `npm install`
-- ...
+Describe the technologies you used and their role in your project.
 
-## Status
-[name of project] is still in progress. `Version 2` will be out soon.
+- HTML – page structure
+- CSS – styling and layout
+- JavaScript – functionality, DOM scripting and form validation
+- localStorage – saving data in the browser, if used
 
-## Credits
-List of contriubutors and sources you used during the project. Also mention if you used ChatGPT or other AI tools when coding and explain how did you benefit from them.
-- [John Doe](johndoe.com)
-- [Beginners guide to BEM](link-goes-here.com)
+## How to use the application
+
+Write short instructions for using the application.
+
+1. Open the published application using the link above.
+2. Fill in the form fields.
+3. Add, edit, remove or mark items as completed.
+4. Refresh the page and check whether data remains available in the browser, if you used localStorage.
+
+## Running the application locally
+
+1. Clone or download this repository to your computer.
+2. Open the project folder.
+3. Open `index.html` in a web browser.
+
+## Screenshots
+
+Add at least one screenshot of your working application.
+
+Example:
+
+![Screenshot of the application](img/screenshot.png)
+
+## Known issues / limitations
+
+Describe any known bugs, missing features or other limitations.
+
+If there are no known issues, write: **No known issues.**
+
+## Division of work
+
+*Complete this section only if you worked in a pair.*
+
+Describe how the work was divided and how the collaboration went.
+
+- Author 1: ...
+- Author 2: ...
+
+## Self-assessment and learning reflection
+
+Reflect on your work and learning process.
+
+- What did I succeed in?
+- What was challenging?
+- What would I improve if I had more time?
+- What did I learn about HTML, CSS, JavaScript and DOM scripting?
+- What remained unclear or what would I like to learn more about?
+- My self-assessed project grade: **xx/10 points**
+
+## Sources and acknowledgements
+
+List all sources, tutorials, images and code examples used in your project.
+
+If you used ChatGPT, GitHub Copilot or another AI tool, mention it here and briefly explain how it supported your work.
+
+- [Source or tutorial name](https://example.com/)
+- [Image source](https://example.com/)
+- AI tool used: ...
+  - How the tool was used: ...
 
 ## License
-Choose a license for your project by following this [guide](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository).
 
-Example: MIT license @ [author](author.com)
+This project is licensed under the MIT License.
+
+More information about adding a license to a GitHub repository:  
+https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository
