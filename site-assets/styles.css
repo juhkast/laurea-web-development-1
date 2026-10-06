@@ -1,0 +1,36 @@
+* { box-sizing: border-box; }
+:root { color-scheme: light; }
+body { margin: 0; background: #f5f7f2; color: #273d34; font-family: Arial, Helvetica, sans-serif; line-height: 1.6; }
+main { width: min(100% - 40px, 960px); margin: auto; }
+a { color: #155e4c; text-underline-offset: 4px; }
+a:hover { color: #0b4134; }
+.hero { position: relative; padding: 72px 190px 52px 0; border-bottom: 1px solid #ccd8ce; }
+.eyebrow { margin: 0 0 8px; font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #526b5d; }
+h1 { margin: 0; font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.1; letter-spacing: -.04em; color: #164c3a; }
+.intro { font-size: 1.2rem; margin: 22px 0 8px; }
+.repo-link { display: inline-block; margin-top: 16px; font-weight: 700; }
+.hero-animals { position: absolute; right: 0; top: 115px; width: 150px; font-size: 3rem; line-height: 1.5; text-align: center; }
+.section-heading { margin: 40px 0 8px; }
+.section-heading h2 { margin: 0; font-size: 1.6rem; color: #164c3a; }
+.section-heading p { color: #526b5d; }
+.workshop-list { margin: 0; padding: 0; list-style: none; }
+.workshop { display: flex; gap: 24px; padding: 30px 0; border-bottom: 1px solid #ccd8ce; }
+.animal { flex: 0 0 64px; font-size: 2.7rem; }
+.workshop-content { min-width: 0; flex: 1; }
+.workshop h2 { margin: 0 0 12px; font-size: 1.4rem; color: #164c3a; }
+.examples { padding: 0; margin: 0 0 14px; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.examples li { overflow-wrap: anywhere; }
+.examples a { display: inline-block; padding: 5px 0; font-size: .98rem; }
+.source { font-size: .85rem; color: #526b5d; }
+footer { padding: 32px 0 40px; color: #526b5d; font-size: .85rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+footer p { margin: 0; }
+:focus-visible { outline: 3px solid #b86716; outline-offset: 5px; }
+.skip-link { position: absolute; top: -80px; left: 20px; background: white; padding: 10px; z-index: 2; }
+.skip-link:focus { top: 10px; }
+@media (max-width: 600px) {
+ .hero { padding: 40px 0 28px; }
+ .hero-animals { position: static; width: auto; text-align: left; font-size: 2.3rem; margin-top: 20px; }
+ .workshop { gap: 14px; padding: 24px 0; }
+ .animal { flex-basis: 44px; font-size: 2rem; }
+ .examples { display: block; }
+}
