@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h2>LocalStorage: yksinkertainen avain–arvo</h2>
+
+    <button onclick="tallenna()">Tallenna</button>
+    <button onclick="hae()">Hae</button>
+    <p id="tulos"></p>
+
+    <script>
+        function tallenna() {
+            // Tallennetaan yksinkertainen avain–arvo-pari
+            localStorage.setItem("tervehdys", "Hei maailma!");
+        }
+
+        function hae() {
+            // Haetaan arvo avaimella ja tuodaan se ruudulle näkyviin
+            const data = localStorage.getItem("tervehdys");
+            document.getElementById("tulos").textContent = data;
+        }
+    </script>
+</body>
+
+</html>
