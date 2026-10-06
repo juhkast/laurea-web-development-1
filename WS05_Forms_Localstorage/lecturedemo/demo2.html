@@ -1,0 +1,188 @@
+  <!-- Note that in this example the .js and .html files are on the same file. Note that for clarity, the javascript should be included in its own file -->
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lomake + localStorage</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+
+        #virhe {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Lisää rivejä lomakkeesta</h2>
+
+    <form id="lomake">
+        <label for="etunimi">Etunimi:</label>
+        <input type="text" id="etunimi" required>
+
+        <label for="sukunimi">Sukunimi:</label>
+        <input type="text" id="sukunimi" required>
+
+        <button type="submit">Lisää taulukkoon</button>
+    </form>
+
+    <p id="virhe" role="alert"></p>
+
+    <button type="button" id="tyhjenna">Tyhjennä kaikki</button>
+
+    <table id="taulukko">
+        <tr>
+            <th>Etunimi</th>
+            <th>Sukunimi</th>
+            <th>Toiminto</th>
+        </tr>
+    </table>
+
+    <h3>Tallennetut tiedot localStoragesta:</h3>
+    <ul id="tallennetut"></ul>
+
+    <script>
+        // Haetaan DOM-elementit.
+        const lomake = document.getElementById("lomake");
+        const etunimiInput = document.getElementById("etunimi");
+        const sukunimiInput = document.getElementById("sukunimi");
+        const taulukko = document.getElementById("taulukko");
+        const tallennetut = document.getElementById("tallennetut");
+        const tyhjennaBtn = document.getElementById("tyhjenna");
+        const virhe = document.getElementById("virhe");
+
+        // Haetaan tallennetut henkilöt.
+        function haeTallennetut() {
+            const data = localStorage.getItem("henkilot");
+
+            if (data === null) {
+                return []; // Ei tallennettuja tietoja.
+            }
+
+            return JSON.parse(data); // JSON-teksti takaisin taulukoksi.
+        }
+
+        // Tallennetaan henkilöt.
+        function tallenna(henkilot) {
+            // localStorage tallentaa merkkijonoja.
+            localStorage.setItem("henkilot", JSON.stringify(henkilot));
+        }
+
+        // Näytetään tallennetut henkilöt listana.
+        function naytaTallennetut() {
+            tallennetut.innerHTML = "";
+
+            const henkilot = haeTallennetut();
+
+            for (let i = 0; i < henkilot.length; i++) {
+                const li = document.createElement("li");
+                li.textContent =
+                    henkilot[i].etunimi + " " + henkilot[i].sukunimi;
+
+                tallennetut.appendChild(li);
+            }
+        }
+
+        // Lisätään rivi HTML-taulukkoon.
+        function lisaaTaulukkoon(etunimi, sukunimi) {
+            const uusiRivi = taulukko.insertRow(-1);
+            const solu1 = uusiRivi.insertCell(0);
+            const solu2 = uusiRivi.insertCell(1);
+            const solu3 = uusiRivi.insertCell(2);
+
+            solu1.textContent = etunimi;
+            solu2.textContent = sukunimi;
+
+            const poistaBtn = document.createElement("button");
+            poistaBtn.type = "button";
+            poistaBtn.textContent = "Poista";
+
+            poistaBtn.addEventListener("click", function () {
+                poistaRivi(poistaBtn);
+            });
+
+            solu3.appendChild(poistaBtn);
+        }
+
+        // Poistetaan henkilö tallennuksesta ja HTML-taulukosta.
+        function poistaRivi(painike) {
+            const rivi = painike.closest("tr");
+            const index = rivi.rowIndex - 1; // Otsikkorivi ohitetaan.
+            const henkilot = haeTallennetut();
+
+            henkilot.splice(index, 1);
+            tallenna(henkilot);
+
+            taulukko.deleteRow(rivi.rowIndex);
+            naytaTallennetut();
+        }
+
+        // Käsitellään lomakkeen lähetys.
+        lomake.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            virhe.textContent = "";
+
+            const etunimi = etunimiInput.value.trim();
+            const sukunimi = sukunimiInput.value.trim();
+
+            if (etunimi === "" || sukunimi === "") {
+                virhe.textContent = "Kirjoita sekä etunimi että sukunimi.";
+                return;
+            }
+
+            const henkilot = haeTallennetut();
+
+            henkilot.push({ etunimi, sukunimi });
+            tallenna(henkilot);
+
+            lisaaTaulukkoon(etunimi, sukunimi);
+            naytaTallennetut();
+
+            lomake.reset();
+            etunimiInput.focus();
+        });
+
+        // Tyhjennetään kaikki tämän esimerkin tallennetut henkilöt.
+        tyhjennaBtn.addEventListener("click", function () {
+            localStorage.removeItem("henkilot");
+
+            // Poistetaan rivit lopusta alkaen. Otsikkorivi säilyy.
+            for (let i = taulukko.rows.length - 1; i > 0; i--) {
+                taulukko.deleteRow(i);
+            }
+
+            tallennetut.innerHTML = "";
+            virhe.textContent = "";
+        });
+
+        // Palautetaan tallennetut henkilöt, kun sivu avataan.
+        // Script on bodyn lopussa, joten HTML-elementit ovat jo olemassa.
+        const henkilot = haeTallennetut();
+
+        for (let i = 0; i < henkilot.length; i++) {
+            lisaaTaulukkoon(henkilot[i].etunimi, henkilot[i].sukunimi);
+        }
+
+        naytaTallennetut();
+    </script>
+</body>
+
+</html>

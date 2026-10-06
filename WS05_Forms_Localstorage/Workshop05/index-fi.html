@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop 5: Eläinlomakkeet ja localStorage</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<main>
+<header>
+  <p class="course">Web Development 1</p>
+  <h1>🐾 Workshop 5: Eläinlomakkeet ja localStorage</h1>
+  <p class="notice">Tukiharjoitus Project 1:een.</p>
+  <p>Rakenna pieni eläinten hoitomuistio. Harjoittele lomakkeita, validointia ja tiedon tallentamista selaimeen. Kirjoita JavaScript tiedostoon js/script.js. Avaa sivu Live Serverillä.</p>
+  <a href="index.html" lang="en">In English</a>
+</header>
+<section>
+  <h2>Harjoitus 1: Eläimen hoitolomake</h2>
+  <ol><li>Kuuntele lomakkeen submit-tapahtumaa addEventListener()-metodilla. Estä oletuslähetys event.preventDefault()-metodilla.</li><li>Lue kenttien arvot ja poista ylimääräiset välilyönnit niiden alusta ja lopusta trim()-metodilla. Näytä kelvolliset arvot konsolissa tai sivulla.</li><li>Validoi lomake: eläimen nimi ja laji eivät saa olla tyhjiä. Hoitomuistion pituuden pitää olla 1–150 merkkiä trim()-käsittelyn jälkeen.</li><li>Näytä selkeä virheviesti virheellisen kentän vieressä. Bonus: lisää kentälle invalid-luokka ja poista se, kun virhe korjataan.</li></ol>
+  <p>Esimerkki: Nala / Norsu / Tarkista vesikulho.</p>
+  <!-- novalidate allows students to practise JavaScript validation. -->
+  <form id="animalForm" novalidate>
+    <label for="animalName">Eläimen nimi</label>
+    <input id="animalName" name="name" type="text" required aria-describedby="nameError">
+    <span id="nameError" class="error" aria-live="polite"></span>
+    <label for="animalSpecies">Laji</label>
+    <input id="animalSpecies" name="species" type="text" required aria-describedby="speciesError">
+    <span id="speciesError" class="error" aria-live="polite"></span>
+    <label for="careNote">Hoitomuistio</label>
+    <textarea id="careNote" name="note" rows="3" required aria-describedby="noteError"></textarea>
+    <span id="noteError" class="error" aria-live="polite"></span>
+    <button type="submit">Lisää eläin</button>
+  </form>
+  <p id="formResult" role="status"></p>
+</section>
+<section>
+  <h2>Harjoitus 2: Eläinkummimaksun laskuri</h2>
+  <p>Käytä kuvitteellisia vuosimaksuja: norsu 10 €, pingviini 15 €, panda 20 € ja tiikeri 25 €.</p>
+  <ol><li>Lue vuosimaksu ja vuosien määrä. Hyväksy vain positiiviset kokonaiset vuodet.</li><li>Laske kokonaishinta: vuosimaksu × vuodet. Näytä hinta kahdella desimaalilla.</li><li>Yli 2 vuodesta saa 20 % alennuksen. Vähintään 5 vuodesta vähennetään lisäksi 5 € prosenttialennuksen jälkeen. Näytä alennustieto lomakkeen alla.</li></ol>
+  <form id="sponsorForm">
+    <label for="animalType">Eläin</label>
+    <select id="animalType" name="type"><option value="10">Norsu – 10 € / vuosi</option><option value="15">Pingviini – 15 € / vuosi</option><option value="20">Panda – 20 € / vuosi</option><option value="25">Tiikeri – 25 € / vuosi</option></select>
+    <label for="years">Vuosia</label>
+    <input id="years" name="years" type="number" min="1" step="1" value="1" required>
+    <button type="submit">Laske</button>
+  </form>
+  <p id="cost" role="status">Yhteensä: ei vielä laskettu.</p>
+  <p id="discountMessage" aria-live="polite"></p>
+</section>
+<section>
+  <h2>Harjoitus 3: Eläimen tallentaminen</h2>
+  <ol><li>Luo harjoituksen 1 hyväksytyn lähetyksen jälkeen olio, jolla on kentät name, species ja note.</li><li>Tallenna olio avaimella ws05Animal käyttäen localStorage.setItem()-metodia ja JSON.stringify()-muunnosta. Jokainen tallennus korvaa edellisen eläimen.</li><li>Tutki tallennettua arvoa selaimen kehittäjätyökaluista: Application → Local Storage → sivustosi osoite.</li></ol>
+</section>
+<section>
+  <h2>Harjoitus 4: Eläimen lataaminen</h2>
+  <ol><li>Lue ws05Animal localStorage.getItem()-metodilla, kun Lataa eläin -painiketta klikataan. Jos tulos on null, näytä “Ei vielä tallennettua eläintä”.</li><li>Muunna tallennettu teksti olioksi JSON.parse()-metodilla. Näytä eläimen tiedot savedAnimal-elementissä textContent-ominaisuudella.</li><li>Kutsu samaa latausfunktiota myös sivun avautuessa. Testaa tallentamalla eläin ja päivittämällä sivu.</li><li>Poista vain ws05Animal removeItem()-metodilla, kun Poista tallennettu eläin -painiketta klikataan. Päivitä myös sivulla näkyvä tulos.</li></ol>
+  <div class="actions">
+    <button type="button" id="loadAnimal">Lataa eläin</button>
+    <button type="button" id="clearAnimal" class="secondary">Poista tallennettu eläin</button>
+  </div>
+  <p id="savedAnimal" class="saved" role="status">Tallennetun eläimen tiedot näkyvät tässä.</p>
+  <p>Bonus: tallenna useita eläimiä taulukkoon. Palauta lista sivun päivityksen jälkeen ja lisää jokaiselle eläimelle poistopainike.</p>
+</section>
+<section>
+  <h2>Pohdinta: sessionStorage ja localStorage</h2>
+  <p>Kokeile sessionStoragea avaimella ws05SessionAnimal. Tallenna eläin, päivitä sivu ja sulje sitten välilehti. Avaa sivu uudessa välilehdessä ja vertaa tulosta localStorageen. Keksi kummallekin käyttötapaus.</p>
+</section>
+<footer><p>Hyödynnä oppimaasi Project 1:ssä. Aloita wireframesta ja yhdestä ydintoiminnosta.</p></footer>
+</main>
+</body>
+</html>

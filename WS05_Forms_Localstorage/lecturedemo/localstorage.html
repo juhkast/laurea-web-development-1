@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage – esimerkki / example</title>
+
+    <!-- Ladataan JavaScript HTML:n jäsentämisen jälkeen. -->
+    <!-- Run JavaScript after the HTML has been parsed. -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <h2>
+        localStorage: tallentaminen ja hakeminen
+        / <span lang="en">saving and loading</span>
+    </h2>
+
+    <button type="button" id="tallennaBtn">
+        Tallenna / <span lang="en">Save</span>
+    </button>
+
+    <button type="button" id="haeBtn">
+        Hae / <span lang="en">Load</span>
+    </button>
+
+    <!-- Tallennettu tieto tai palaute näytetään tässä. -->
+    <!-- Display the saved data or feedback here. -->
+    <p id="tulos" aria-live="polite"></p>
+</body>
+
+</html>

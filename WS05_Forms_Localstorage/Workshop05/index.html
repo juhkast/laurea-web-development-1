@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop 5: Animal forms and localStorage</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<main>
+<header>
+  <p class="course">Web Development 1</p>
+  <h1>🐾 Workshop 5: Animal forms and localStorage</h1>
+  <p class="notice">Practice for Project 1.</p>
+  <p>Build a small animal care notebook. Practise forms, validation and saving data in the browser. Write your JavaScript in js/script.js. Open the page with Live Server.</p>
+  <a href="index-fi.html" lang="fi">Suomeksi</a>
+</header>
+<section>
+  <h2>Exercise 1: Animal care form</h2>
+  <ol><li>Listen for the form submit event with addEventListener(). Use event.preventDefault() to prevent the default form submission.</li><li>Read the field values and use trim() to remove spaces from their ends. Show valid values in the console or on the page.</li><li>Validate the form: the animal name and species must not be empty. The care note must contain 1–150 characters after trimming.</li><li>Display a useful message next to each invalid field. Bonus: add the invalid CSS class to the field and remove it when the error is corrected.</li></ol>
+  <p>Example: Nala / Elephant / Check the water bowl.</p>
+  <!-- novalidate allows students to practise JavaScript validation. -->
+  <form id="animalForm" novalidate>
+    <label for="animalName">Animal name</label>
+    <input id="animalName" name="name" type="text" required aria-describedby="nameError">
+    <span id="nameError" class="error" aria-live="polite"></span>
+    <label for="animalSpecies">Species</label>
+    <input id="animalSpecies" name="species" type="text" required aria-describedby="speciesError">
+    <span id="speciesError" class="error" aria-live="polite"></span>
+    <label for="careNote">Care note</label>
+    <textarea id="careNote" name="note" rows="3" required aria-describedby="noteError"></textarea>
+    <span id="noteError" class="error" aria-live="polite"></span>
+    <button type="submit">Add animal</button>
+  </form>
+  <p id="formResult" role="status"></p>
+</section>
+<section>
+  <h2>Exercise 2: Animal sponsorship calculator</h2>
+  <p>Use these fictional annual fees: Elephant €10, Penguin €15, Panda €20 and Tiger €25.</p>
+  <ol><li>Read the annual fee and the number of years. Only accept positive whole years.</li><li>Calculate the total: annual fee × years. Show the price with two decimal places.</li><li>For more than 2 years, apply a 20% discount. For 5 years or more, also subtract €5 after the percentage discount. Show the discount below the form.</li></ol>
+  <form id="sponsorForm">
+    <label for="animalType">Animal</label>
+    <select id="animalType" name="type"><option value="10">Elephant – 10 € / year</option><option value="15">Penguin – 15 € / year</option><option value="20">Panda – 20 € / year</option><option value="25">Tiger – 25 € / year</option></select>
+    <label for="years">Years</label>
+    <input id="years" name="years" type="number" min="1" step="1" value="1" required>
+    <button type="submit">Calculate</button>
+  </form>
+  <p id="cost" role="status">Total: not calculated yet.</p>
+  <p id="discountMessage" aria-live="polite"></p>
+</section>
+<section>
+  <h2>Exercise 3: Saving the animal</h2>
+  <ol><li>After valid submission in Exercise 1, create an object with name, species and note.</li><li>Save the object under the key ws05Animal using localStorage.setItem() and JSON.stringify(). Each save replaces the previous animal.</li><li>Inspect the stored value in browser developer tools: Application → Local Storage → your site address.</li></ol>
+</section>
+<section>
+  <h2>Exercise 4: Loading the animal</h2>
+  <ol><li>When Load animal is clicked, read ws05Animal with localStorage.getItem(). If the result is null, display “No saved animal yet”.</li><li>Use JSON.parse() to convert the saved text into an object. Display the animal details in savedAnimal using textContent.</li><li>Reuse your loading function when the page opens. Test by saving an animal and refreshing the page.</li><li>When Clear saved animal is clicked, remove only ws05Animal with removeItem() and update the displayed result.</li></ol>
+  <div class="actions">
+    <button type="button" id="loadAnimal">Load animal</button>
+    <button type="button" id="clearAnimal" class="secondary">Clear saved animal</button>
+  </div>
+  <p id="savedAnimal" class="saved" role="status">Saved animal details will appear here.</p>
+  <p>Bonus: save several animals in an array. Restore the list after refreshing and add a delete button for each animal.</p>
+</section>
+<section>
+  <h2>Reflection: sessionStorage and localStorage</h2>
+  <p>Try sessionStorage instead, using the key ws05SessionAnimal. Save an animal, refresh the page, then close the tab and open the page again in a new tab. Compare this with localStorage. Suggest a use for each.</p>
+</section>
+<footer><p>Use what you learn in Project 1. Start with a wireframe and one core feature.</p></footer>
+</main>
+</body>
+</html>
