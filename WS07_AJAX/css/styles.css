@@ -1,0 +1,124 @@
+/* Työpaja 7 – JSON ja AJAX */
+
+* {
+  box-sizing: border-box;
+}
+
+body.ws8 {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+  background-color: #f4f7f5;
+  color: #24352c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.ws8 h1 {
+  color: #205c40;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.25;
+}
+
+.ws8 h2 {
+  margin-top: 32px;
+  color: #205c40;
+  line-height: 1.4;
+}
+
+.ws8 hr {
+  margin: 32px 0;
+  border: 0;
+  border-top: 1px solid #cbd9d0;
+}
+
+.ws8 a {
+  color: #18664a;
+  overflow-wrap: anywhere;
+  text-underline-offset: 3px;
+}
+
+.ws8 li {
+  margin-bottom: 10px;
+}
+
+.ws8 button,
+.ws8 input,
+.ws8 select {
+  font: inherit;
+}
+
+.ws8 button {
+  margin: 4px;
+  padding: 10px 18px;
+  border: 1px solid #205c40;
+  border-radius: 8px;
+  background-color: #205c40;
+  color: white;
+  cursor: pointer;
+}
+
+.ws8 button:hover {
+  background-color: #16452f;
+}
+
+.ws8 input,
+.ws8 select {
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #9aafa1;
+  border-radius: 8px;
+  background-color: white;
+  color: #24352c;
+}
+
+.ws8 :is(button, input, select, a):focus-visible {
+  outline: 3px solid #b46b00;
+  outline-offset: 3px;
+}
+
+.ws8 pre {
+  padding: 20px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background-color: #22372b;
+  color: #e6f5eb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.ws8 #jsondata,
+.ws8 #rawdata,
+.ws8 #weatherdata {
+  margin: 20px 0;
+  padding: 20px;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+  border: 1px solid #cbd9d0;
+  border-left: 5px solid #39855a;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.ws8 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ws8 th,
+.ws8 td {
+  padding: 12px;
+  border: 1px solid #cbd9d0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ws8 th {
+  background-color: #e4eee7;
+}
+
+.ws8 img {
+  max-width: 100%;
+  height: auto;
+}
