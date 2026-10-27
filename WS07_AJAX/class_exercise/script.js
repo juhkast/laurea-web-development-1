@@ -1,28 +1,28 @@
-// lisätään eventlistener, joka kuuntelee, kun sivu on latautunut
+// Add an event listener that waits for the page to finish loading.
 document.addEventListener('DOMContentLoaded', () => {
-    // haetaan elementti, jonka id on Quotes
+    // Find the element whose id is Quotes.
     const quoteContainer = document.getElementById('Quotes');
-    // määritellään uri, joka on osoite, josta haetaan dataa
+    // Set the URI to the address from which the data will be fetched.
     const uri = "https://dummyjson.com/quotes"
-    // haetaan dataa uri:sta fetch-metodilla, joka palauttaa promisen ja käsitellään se
+    // Fetch data from the URI and handle the promise returned by fetch().
     fetch(uri)
         .then(response => response.json())
         .then(data => {
-            // kutsutaan displayCustomerInfo-funktiota, joka käsittelee datan ja tulostaa sen sivulle
+            // Call displayCustomerInfo() to process the data and display it on the page.
             displayCustomerInfo(data);
         })
-        // jos tulee virhe, tulostetaan se konsoliin
+        // If an error occurs, print it to the console.
         .catch(error => {
             console.error('Error fetching customer data:', error);
         });
-    // määritellään displayCustomerInfo-funktio, joka käsittelee datan ja tulostaa sen sivulle
+    // Define displayCustomerInfo() to process the data and display it on the page.
     function displayCustomerInfo(quoteData) {
-        // käydään läpi quoteData-objektin quotes-taulukko ja tulostetaan jokainen quote ja sen author  
+        // Loop through the quotes array and display each quote and its author.
         console.log(quoteData);
         for (let i = 0; i < quoteData.quotes.length; i++) {
             const id = quoteData.quotes[i].author;
             const quote = quoteData.quotes[i].quote;
-            // luodaan div-elementti, joka sisältää quote- ja id-tiedot ja lisätään se quoteContainer-elementtiin
+            // Create a div containing the quote and author, then add it to quoteContainer.
             const quoteElement = document.createElement('div');
             quoteElement.innerHTML = `<h2> ${quote} </h2> <p> ${id} </p><hr>`;
             quoteContainer.appendChild(quoteElement);

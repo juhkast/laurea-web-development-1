@@ -1,19 +1,19 @@
-// HTML-sivulla pitää olla <div id="weatherdata"></div>
+// The HTML page must contain a <div id="weatherdata"></div> element.
 const tulos = document.getElementById("weatherdata");
 
 var xmlhttp = new XMLHttpRequest();
 
 xmlhttp.open(
     "GET",
-    "https://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&lang=fi&appid=ff64c247a136f706923d1ee0d55d71e2",
+    "https://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&lang=en&appid=ff64c247a136f706923d1ee0d55d71e2",
     true
 );
 
-// Määritellään käsittelijät ennen pyynnön lähettämistä.
+// Define the handlers before sending the request.
 xmlhttp.onload = function () {
     if (xmlhttp.status !== 200) {
         tulos.textContent =
-            "Haku epäonnistui: " + xmlhttp.status +
+            "Request failed: " + xmlhttp.status +
             " – " + xmlhttp.responseText;
         return;
     }
@@ -24,10 +24,10 @@ xmlhttp.onload = function () {
     let rivit = `
         <table border="1">
             <tr>
-                <th>Kaupunki</th>
-                <th>Lämpötila</th>
-                <th>Sää</th>
-                <th>Kuvake</th>
+                <th>City</th>
+                <th>Temperature</th>
+                <th>Weather</th>
+                <th>Icon</th>
             </tr>
             <tr>
                 <td>${json.name}</td>
@@ -48,7 +48,7 @@ xmlhttp.onload = function () {
 
 xmlhttp.onerror = function () {
     tulos.textContent =
-        "Verkkovirhe. Tarkista selaimen Console-välilehti (F12).";
+        "Network error. Check the browser's Console tab (F12).";
 };
 
 xmlhttp.send();

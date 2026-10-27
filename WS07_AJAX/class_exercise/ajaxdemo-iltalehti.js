@@ -1,39 +1,39 @@
-// Luodaan ajax olio
+// Create an XMLHttpRequest object.
 var xmlhttp = new XMLHttpRequest();
-// xmlhttp.open("GET","https://www.iltalehti.fi/rss/uutiset.xml",true);
+// Example request for the live news feed:
+// xmlhttp.open("GET", "https://www.iltalehti.fi/rss/uutiset.xml", true);
 xmlhttp.open("GET", "./uutiset.xml", true);
 xmlhttp.send();
 
-// Luodaan vastauksen käsittelijä
+// Handle the response.
 xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200){
         // console.log(xmlhttp.responseXML)
-        // Otetaan vastaus talteen
+        // Store the response.
         let xmldoc = xmlhttp.responseXML
 
-        // Aletaan parsimaan
-        // Kaivetaan item-tägit esiin
+        // Start parsing the response.
+        // Find all item elements.
         let uutiset = xmldoc.querySelectorAll('item')
         let rivit = '<table border="1">'
-        // Käydään jokainen item-läpi
+        // Loop through each item.
         for (let i=0; i < uutiset.length; i++){
             let otsikko = uutiset[i].querySelector('title').innerHTML
             let pvm = uutiset[i].querySelector('pubDate').innerHTML
             let link = uutiset[i].querySelector('link').innerHTML
-            //console.log(otsikko, pvm)
-            // Luodaan silmukan jokaisella kierroksella uusi rivi
+            // console.log(otsikko, pvm)
+            // Create a new table row on each iteration.
               rivit += `<tr>
                             <td><a target='_blank' href='${link}'>${otsikko}</a></td>
                             <td>${pvm}</td>
                          </tr>`
             
-        } // for
-        // Suljetaan taulukko-tägi
+        } // End of the for loop.
+        // Close the table element.
         rivit += '</table>'
-        // Korvaa sivun nykyisen sisällön rivit-muuttujan sisällöllä
+        // Replace the page's current content with the contents of rivit.
         document.body.innerHTML = rivit
       
         
   }
 }
-

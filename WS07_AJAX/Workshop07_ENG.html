@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Workshop 7</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="ws8">
+	<h1>Workshop 7: Parsing JSON/XML with AJAX</h1>
+	<hr />
+	<p>In this workshop, you will practise using JSON in JavaScript applications. Use the lecture materials as a
+		reference while working through these exercises.</p>
+
+	<hr />
+	<h2>Exercise 1: JSON basics</h2>
+	<p>JSON stands for JavaScript Object Notation. It represents data in a format that JavaScript can understand
+		directly, so no conversion is needed before using it.</p>
+	<p>
+		<button>Show first and last names only</button>
+		<button>Show all details</button>
+	</p>
+	<p>Create a new JSON dataset in your JavaScript code using the example below. Then write functions that run when
+		the buttons are clicked.</p>
+
+	<pre>
+			var text = '{ "employees" : [' +
+			'{ "firstName":"John" , "lastName":"Doe" },' +
+			'{ "firstName":"Anna" , "lastName":"Smith" },' +
+			'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+		</pre>
+	<ul>
+		<li>The first button should display each person's first and last name in the div below.</li>
+		<li>The second button should display all details for every person in the div below. You can use loops if you
+			wish.</li>
+	</ul>
+	<div id="jsondata">JSON data will appear here.</div>
+	<hr />
+	<h2>Exercise 2: Fetching and parsing JSON from the web</h2>
+	<p>There are two buttons below. Edit the source code and add onclick event handlers to them. Implement the
+		functionality described here.</p>
+	<p>
+		<button>Load raw data</button>
+		<button>Load and parse data</button>
+	</p>
+
+	<ul>
+		<li>The first button should run a JavaScript function that fetches the provided <a
+				href="http://www.omdbapi.com/?s=star+wars&apikey=cbbc6750">JSON file from the web</a> and displays the
+			raw response in the div below (id=rawdata). Use the developer tools (F12) to monitor the AJAX request and
+			inspect its headers, timings, and other details.</li>
+		<li>The second button should run a function that fetches the same data, parses it, and displays the results in
+			a table.</li>
+		<li>Once you have displayed the data, try loading the images on the page as well.</li>
+	</ul>
+	<div id="rawdata">Raw data will appear here.</div>
+
+	<hr />
+	<h2>Exercise 3: Practical challenge: OpenWeatherMap API</h2>
+
+	<p>OpenWeatherMap is a well-known online provider of weather data. It offers an API that developers can use to
+		fetch weather information. <a href="https://openweathermap.org/api">Read the documentation here</a>.</p>
+	<p>Your task is to write a weather app that displays weather information based on the user's choices. <b>Note:
+			you must register for a free account to get an API key that lets you use the service.</b></p>
+
+	<p>An example REST API request could look like this: <a
+			href="http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2">http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2</a>.
+		Click the link to see the response.</p>
+	<ul>
+		<li>First, create an app that displays raw weather data (temperature, cloud cover, and humidity) for a
+			specified city when a button is clicked. <button>Fetch data</button></li>
+		<li>Once this works, parse the data and display it in a div.</li>
+		<li>Next, add an onchange event to the drop-down menu so users can choose which city's data to display.</li>
+		<li>Finally, add functionality to the input field so users can enter a search query, send it to the
+			OpenWeatherMap API, and display the results in the app.</li>
+	</ul>
+	<p>Select a city from the list:</p>
+	<select name="mySelect" id="city" onchange="">
+		<option value="Helsinki">Helsinki</option>
+		<option value="Stockholm">Stockholm</option>
+		<option value="Rome">Rome</option>
+		<option value="New York">New York</option>
+	</select>
+	<p>Or enter a search term: <input id="citysearch" /><button id="search">Search</button></p>
+	<div id="weatherdata">Weather information will appear here.</div>
+
+</body>
+
+</html>
