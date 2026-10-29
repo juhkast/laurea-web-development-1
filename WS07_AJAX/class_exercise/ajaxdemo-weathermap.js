@@ -5,7 +5,7 @@ var xmlhttp = new XMLHttpRequest();
 
 xmlhttp.open(
     "GET",
-    "https://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&lang=en&appid=ff64c247a136f706923d1ee0d55d71e2",
+    "https://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&lang=en&appid=YOURAPIKEY", // Replace with your own API key.
     true
 );
 

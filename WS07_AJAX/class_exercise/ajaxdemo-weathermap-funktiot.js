@@ -9,7 +9,7 @@ function haeData(city) {
     }
 
     // Add your own API key here. You can get one from the OpenWeatherMap website.
-    const apiKey = "ff64c247a136f706923d1ee0d55d71e2";
+    const apiKey = "YOUR_API_KEY"; // Replace with your own API key.
     const url =
         `https://api.openweathermap.org/data/2.5/weather` +
         `?q=${encodeURIComponent(city)}` +
