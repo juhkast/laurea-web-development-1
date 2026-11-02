@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<HTML lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Workshop 8</title>
+    <link rel="stylesheet" href="../WS07_AJAX/css/styles.css">
+    <!--This is a comment. Comments are not displayed in the browser-->
+    <!--defer waits until the HTML has been read before executing JavaScript.-->
+    <script src="script.js" defer></script>
+</head>
+
+<body class="ws8">
+    <h1>Workshop 8: Parsing XML with JavaScript</h1>
+    <hr />
+    <p>In this exercise, we will practise using AJAX in JavaScript applications. Use the lecture materials as a
+        reference while working on these tasks. If you completed the exercise last time, you can use it as a starting
+        point here. Only the data format and parsing will change.</p>
+
+    <hr />
+    <h2>Exercise 1: A practical challenge: OpenWeatherMap API</h2>
+
+    <p>OpenWeatherMap is a well-known provider of weather data online. It offers an API that developers can use to
+        retrieve weather information. <a href="https://openweathermap.org/api">The documentation is available here</a>.
+    </p>
+    <p>Your task is to write a weather app that displays weather information according to the user's preferences.
+        <b>Note that you need to register (for free) to get an API key that allows you to use the service.</b>
+    </p>
+
+    <p>A sample REST API request could look like this (note the mode parameter!): <a
+            href="http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=xml&APPID=ff64c247a136f706923d1ee0d55d71e2">http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=xml&APPID=ff64c247a136f706923d1ee0d55d71e2</a>.
+        Click to see the response.</p>
+    <ul>
+        <li>First, develop an app that displays raw weather data (temperature, cloudiness, humidity) for a specific
+            city when a button is clicked. <button>Fetch data</button></li>
+        <li>Once that works, parse the data and display it in a div.</li>
+        <li>Next, add an onchange event to the dropdown menu so the user can choose which city's data to display from
+            the list.</li>
+        <li>Finally, add functionality to the input field so the user can enter a search query, which is sent to the
+            OpenWeatherMap API, and display the results in the app.</li>
+    </ul>
+    <p>Select a city from the list:</p>
+    <select name="mySelect" id="city" onchange="">
+        <option value="Helsinki">Helsinki</option>
+        <option value="Stockholm">Stockholm</option>
+        <option value="Rome">Rome</option>
+        <option value="New York">New York</option>
+    </select>
+    <p>Or enter a search term: <input id="citysearch" /><button id="search">Search</button></p>
+    <div id="weatherdata">Weather information will appear here.</div>
+
+    <!--This is a comment. Comments are not displayed in the browser-->
+    <button id="fetchWeather">Fetch data</button>
+
+</body>
+
+</html>

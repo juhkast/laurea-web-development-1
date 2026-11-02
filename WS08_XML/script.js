@@ -1,44 +1,42 @@
-const apiKey = "OMA_API_AVAIN"; // Korvaa käytössäsi olevalla avaimella.
-const weatherdata = document.getElementById("weatherdata");
-
-document.getElementById("fetchWeather").addEventListener("click", async function () {
-    weatherdata.textContent = "Haetaan säätietoja...";
-
-    try {
-        // fetch lähettää pyynnön API:lle.
-        // await odottaa vastausta, joka tallennetaan response-muuttujaan.
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=xml&appid=${apiKey}`
-        );
-
-        // Tarkistetaan, onnistuiko pyyntö.
-        // Jos ei, siirrytään catch-lohkoon käsittelemään virhe.
-        if (!response.ok) {
-            throw new Error(`HTTP-virhe: ${response.status}`);
-        }
-        // KORVAA NÄMÄ KAKSI RIVIÄ XML:n käsittelyllä, esim. DOMParserin avulla.
-        // const xmlText = await response.text();
-        // weatherdata.textContent = xmlText;
-        // Luetaan vastauksen sisältö XML-tekstinä.
-
-        const xmlText = await response.text();
-
-// Muutetaan XML-teksti dokumentiksi, josta voidaan hakea tietoja.
-const xml = new DOMParser().parseFromString(xmlText, "application/xml");
-
-// Poimitaan elementtien value-attribuutit.
-const temperature = xml.querySelector("temperature").getAttribute("value");
-// const humidity = xml.querySelector("humidity").getAttribute("value");
-// const clouds = xml.querySelector("clouds").getAttribute("value");
+// Store your OpenWeatherMap API key.
 
 
-// Näytetään tiedot sivulla.
-// Lisää tähän tarvittavat rivit, jotta näytetään myös kosteus ja pilvisyys.
-weatherdata.textContent =
-    `Helsinki: lämpötila ${temperature} °C`;
+// Find the HTML element where we display the weather data.
 
 
-    } catch (error) {
-        weatherdata.textContent = "Säätietojen haku epäonnistui: " + error.message;
-    }
-});
+// Run this function when the user clicks the "Fetch data" button.
+// async allows us to use await inside the function.
+
+
+     // Display a loading message.
+   
+
+    // Try to fetch and process the weather data.
+  
+
+        // Send a GET request to the weather API and wait for the response.
+        // q=Helsinki selects the city.
+        // units=metric gives the temperature in Celsius.
+        // mode=xml requests the data in XML format.
+        // ${apiKey} inserts our API key into the URL.
+      
+
+        // Check whether the API returned a successful HTTP status.
+        
+         // Create an error and jump to the catch block.
+        
+
+        // Read the response body as text and wait until it is ready.
+        
+
+        // Display the XML as plain text on the page.
+       
+
+    // Handle errors from the request or the code above.
+  
+
+        // Choose an error message in the page's language.
+   
+
+        // Display the message and details of the error.
+  
