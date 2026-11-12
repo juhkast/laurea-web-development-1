@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sääkaavio – OpenWeatherMap</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Workshop 9: JavaScript-kirjastoja</h1>
+    <p>Ulkoisten kirjastojen avulla omiin JavaScript-sovelluksiin voidaan lisätä helposti monenlaista toiminnallisuutta. Kirjastoja
+    on tuhansittain ja vain mielikuvitus on rajana niiden käytössä. Alle olen koonnut muutamia hauskoja kirjastoja kokeiltavaksi:</p>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Kirjasto</th>
+      <th>Linkki</th>
+      <th>Selitys</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Baffle.js</strong></td>
+      <td><a href="https://camwiegert.github.io/baffle/" target="_blank">https://camwiegert.github.io/baffle/</a></td>
+      <td>Tekstiefektikirjasto, joka “salaa” ja paljastaa tekstiä animoidusti. Sopii näyttäviin otsikoihin ja esittelysivuille.</td>
+    </tr>
+    <tr>
+      <td><strong>Vanta.js</strong></td>
+      <td><a href="https://www.vantajs.com/" target="_blank">https://www.vantajs.com/</a></td>
+      <td>Luo dynaamisia 3D-taustaelementtejä (esim. aaltoja, partikkeleita, lintuja) helposti verkkosivuille. Käyttää WebGL:ää.</td>
+    </tr>
+    <tr>
+      <td><strong>SweetAlert2</strong></td>
+      <td><a href="https://sweetalert2.github.io/" target="_blank">https://sweetalert2.github.io/</a></td>
+      <td>Kauniita ja helppokäyttöisiä ponnahdusikkunoita (alert, confirm, prompt) ilman tylsiä selaimen oletusikkunoita.</td>
+    </tr>
+    <tr>
+      <td><strong>Leaflet.js</strong></td>
+      <td><a href="https://leafletjs.com/" target="_blank">https://leafletjs.com/</a></td>
+      <td>Avoimen lähdekoodin karttakirjasto, jolla voi näyttää ja muokata karttoja (esim. OpenStreetMap) helposti selaimessa.</td>
+    </tr>
+    <tr>
+      <td><strong>Axios</strong></td>
+      <td><a href="https://axios-http.com/" target="_blank">https://axios-http.com/</a></td>
+      <td>Kevyt kirjasto HTTP-pyyntöjen (GET, POST jne.) tekemiseen. Helpottaa API-yhteyksiä ja datan hakua.</td>
+    </tr>
+    <tr>
+      <td><strong>Chart.js</strong></td>
+      <td><a href="https://www.chartjs.org/" target="_blank">https://www.chartjs.org/</a></td>
+      <td>Yksinkertainen ja suosittu kirjasto datan visualisointiin (pylväs-, viiva-, piirakka-, ja muita kaavioita).</td>
+    </tr>
+    <tr>
+      <td><strong>jQuery</strong></td>
+      <td><a href="https://jquery.com/" target="_blank">https://jquery.com/</a></td>
+      <td>Klassinen kirjasto, joka helpottaa DOM-manipulaatiota, animaatioita ja AJAX-pyyntöjä. Nykyään vähemmän käytetty, mutta hyvä opetuskohde.</td>
+    </tr>
+  </tbody>
+</table>
+
+    <h1>5 päivän sääennuste</h1>
+<p>Alla olevaan sääsovellukseen olen lisännyt Chart.js -kirjaston piirtämään kuvaajia lämpötiloista.</p>
+    <label for="kaupunki">Kaupunki:</label>
+    <input type="text" id="kaupunki" value="Helsinki" />
+    <button onclick="haeSaa()">Hae sää</button>
+    <label for="chartType">Kaavion tyyppi:</label>
+    <select id="chartType" onchange="paivitaKaavio()">
+        <option value="line">Viiva (Line)</option>
+        <option value="bar">Pylväs (Bar)</option>
+        <option value="pie">Piirakka (Pie)</option>
+    </select>
+    <canvas id="tempChart" width="400" height="200"></canvas>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
