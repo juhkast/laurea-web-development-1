@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Koodikissan kaapattu sääennuste</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 1.25rem;
+      color: #f3f7ff;
+      background: #0c1429;
+      font-family: system-ui, sans-serif;
+    }
+
+    main {
+      width: min(100%, 42rem);
+      box-sizing: border-box;
+      padding: clamp(1.5rem, 6vw, 3.25rem);
+      border: 1px solid #52698c;
+      border-top: 4px solid #b5f977;
+      border-radius: 1rem;
+      background: #172443;
+    }
+
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; }
+
+    .forecast {
+      min-height: 3em;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: #0c1429;
+      color: #c7ffa0;
+      font: 1.15rem / 1.5 ui-monospace, monospace;
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      border: 0;
+      border-radius: 0.5rem;
+      color: #0c1429;
+      background: #b5f977;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { background: #d3ffac; }
+    button:focus-visible { outline: 2px solid #f3f7ff; outline-offset: 4px; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1><span aria-hidden="true">🐱</span> Koodikissan kaapattu sääennuste</h1>
+    <p id="ennuste" class="forecast" aria-hidden="true">[ ENNUSTE SALATTU ]</p>
+    <p id="tulos" class="sr-only" role="status"></p>
+    <button id="paljasta" type="button">Pura kissakoodi</button>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
+  <script>
+    const ennusteet = [
+      "Päivällä kuuroja. Yöllä maukuja.",
+      "Sataa tonnikalaa. Ulkoile haarukalla.",
+      "Tuulen nopeus: kolme kissaa sekunnissa.",
+      "Kissoja sataa koirien kanssa. Ota luuvarjo."
+    ];
+    const ennuste = document.getElementById("ennuste");
+    const tulos = document.getElementById("tulos");
+    const animaatio = typeof baffle === "function" ? baffle("#ennuste") : null;
+    const vahennettyLiike = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let indeksi = 0;
+
+    document.getElementById("paljasta").addEventListener("click", () => {
+      const viesti = ennusteet[indeksi];
+      indeksi = (indeksi + 1) % ennusteet.length;
+      tulos.textContent = viesti;
+
+      // Baffle.js sekoittaa tekstin ja paljastaa sen 900 millisekunnissa.
+      if (animaatio && !vahennettyLiike.matches) {
+        animaatio.text(() => viesti).start().reveal(900);
+      } else {
+        animaatio?.reveal();
+        ennuste.textContent = viesti;
+      }
+    });
+  </script>
+</body>
+</html>
