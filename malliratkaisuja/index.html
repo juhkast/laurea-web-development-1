@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    function hae() {
+        // 1. Creating and sending the AJAX request
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "http://www.iltalehti.fi/rss/uutiset.xml", true);
+        xmlhttp.send();
+
+        // 2. Receiving the response
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // console.log(xmlhttp.responseText)
+
+                // 3. Parsing and displaying the response
+                // document.querySelector("#tulos").innerHTML = xmlhttp.responseText;
+                parsiXML(xmlhttp.responseXML);
+            }
+        }
+
+    }
+    function parsiXML(xml) {
+        let items = xml.querySelectorAll("item");
+        console.log(items)
+        let taulukko = "<table border='1'><tr><th>Uutinen</th><th>Julkaistu</th></tr>";
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector("title").innerHTML;
+            let link = items[i].querySelector("link").innerHTML;
+            let pubDate = items[i].querySelector("pubDate").innerHTML;
+            // document.querySelector("#tulos").innerHTML += title + "<br>";
+
+            taulukko += "<tr><td><a href='" + link + "'>" + title + "</a></td><td>" + link + "</td><td>" + pubDate + "</td></tr>";
+        }
+        document.querySelector("#tulos").innerHTML = taulukko;
+
+    }
+</script>
+
+
+<body>
+    <button onclick="hae()" id="btn">Klikkaa tästä</button>
+    <div id="tulos"></div>
+</body>
+
+</html>
