@@ -75,12 +75,12 @@ function paivitaKaavio() {
   piirraKaavio(chartData.labels, chartData.temperatures, city, type);
 }
 
-  $("#haeSaaPainike").on("click", haeSaa);
+ // $("#haeSaaPainike").on("click", haeSaa);
 
-  $("#haeSaaPainike").on("click", function () {
-   $("#saaYllatys").stop(true, true).hide()
-     .fadeIn(200).delay(1000).fadeOut(400);
-   haeSaa();
- });
+//   $("#haeSaaPainike").on("click", function () {
+//    $("#saaYllatys").stop(true, true).hide()
+//      .fadeIn(200).delay(1000).fadeOut(400);
+//    haeSaa();
+//  });
 
 
