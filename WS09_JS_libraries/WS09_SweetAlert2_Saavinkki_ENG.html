@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather tip</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+      background: #e9f4fc;
+      color: #162b44;
+      font-family: system-ui, sans-serif;
+    }
+
+    main {
+      width: min(100%, 32rem);
+      box-sizing: border-box;
+      padding: clamp(1.5rem, 6vw, 3rem);
+      border: 1px solid #d5e5f2;
+      border-radius: 1.25rem;
+      background: #fff;
+    }
+
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    button {
+      padding: 0.75rem 1.25rem;
+      border: 0;
+      border-radius: 0.5rem;
+      background: #145b91;
+      color: #fff;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0c426c;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #145b91;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Weather tip</h1>
+    <button id="vinkkiPainike" type="button">Show a tip</button>
+  </main>
+
+  <!-- Load SweetAlert2 before the page's JavaScript. -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script>
+    const vinkkiPainike = document.getElementById("vinkkiPainike");
+
+    vinkkiPainike.addEventListener("click", () => {
+      Swal.fire({
+        title: "A tip from the cloud crew",
+        text: "If the forecast predicts rain, remember to bring an umbrella!",
+        icon: "info",
+        confirmButtonText: "Got it!",
+        confirmButtonColor: "#145b91"
+      });
+    });
+  </script>
+</body>
+</html>

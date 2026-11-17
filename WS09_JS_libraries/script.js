@@ -1,51 +1,54 @@
-const apiKey = "ff64c247a136f706923d1ee0d55d71e2"; // <-- Lisää oma API-avain tähän
-let tempChart = null; // globaali kaavioviite
-let chartData = {}; // tallennetaan data ja labels uudelleenkäyttöä varten
+const apiKey = "ff64c247a136f706923d1ee0d55d71e2"; // <-- Add your API key here
+let tempChart = null; // Global chart reference
+let chartData = {}; // Store data and labels for reuse
 let City = "Helsinki";
+const language = document.documentElement.lang === "en" ? "en" : "fi";
 
 async function haeSaa() {
   city = document.getElementById("kaupunki").value;
-  let url = ` https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=fi&appid=${apiKey}`;
+  let url = ` https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${language}&appid=${apiKey}`;
   try {
     const response = await axios.get(url);
     const data = response.data.list;
     console.log(data);
-    // Poimitaan joka 3. tunti mitattu lämpötila ja aika
+    // Get the temperature and time recorded every three hours.
     const labels = data.slice(0, 12).map((item) => {
       const aika = new Date(item.dt_txt);
       return `${aika.getDate()}.${aika.getHours()}:00`;
     });
 
     const temperatures = data.slice(0, 12).map((item) => item.main.temp);
-    chartData = { labels, temperatures }; // tallennetaan uudelleenkäyttöä varten
+    chartData = { labels, temperatures }; // Store the values for reuse.
     console.log(temperatures);
     piirraKaavio(labels, temperatures, city, "line");
   } catch (error) {
-    console.error("Virhe datan haussa:", error);
+    console.error("Error fetching data:", error);
     alert(
-      "Säädatan hakeminen epäonnistui. Tarkista kaupungin nimi tai API-avain."
+      language === "en"
+        ? "Could not fetch weather data. Check the city name or API key."
+        : "Säädatan hakeminen epäonnistui. Tarkista kaupungin nimi tai API-avain."
     );
   }
 }
 
-// Ladataan heti alkuun Helsingin sää
+// Load the weather for Helsinki when the page opens.
 haeSaa();
 function piirraKaavio(labels, data, city, type) {
   const ctx = document.getElementById("tempChart").getContext("2d");
 
-  // Jos vanha kaavio on olemassa, tuhotaan se ensin
+  // Destroy the previous chart before creating a new one.
   if (window.tempChart && typeof window.tempChart.destroy === "function") {
     window.tempChart.destroy();
   }
 
-  // Luodaan uusi kaavio
+  // Create a new chart.
   window.tempChart = new Chart(ctx, {
     type: type,
     data: {
       labels: labels,
       datasets: [
         {
-          label: `Lämpötila (${city}) °C`,
+          label: `${language === "en" ? "Temperature" : "Lämpötila"} (${city}) °C`,
           data: data,
           borderWidth: 2,
           borderColor: "rgb(75, 192, 192)",
@@ -65,10 +68,19 @@ function piirraKaavio(labels, data, city, type) {
 }
 
 function paivitaKaavio() {
-  // Haetaan valittu kaavion tyyppi select-elementistä
+  // Get the selected chart type.
   let type = document.getElementById("chartType").value;
   console.log(type);
-  // Tarkistetaan, että meillä on aiemmin haettua dataa
-  // Piirretään kaavio uudelleen valitulla tyypillä
+  // Redraw the chart with the selected type and previously fetched data.
   piirraKaavio(chartData.labels, chartData.temperatures, city, type);
 }
+
+  $("#haeSaaPainike").on("click", haeSaa);
+
+  $("#haeSaaPainike").on("click", function () {
+   $("#saaYllatys").stop(true, true).hide()
+     .fadeIn(200).delay(1000).fadeOut(400);
+   haeSaa();
+ });
+
+

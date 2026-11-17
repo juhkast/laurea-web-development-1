@@ -65,6 +65,11 @@
     <label for="kaupunki">Kaupunki:</label>
     <input type="text" id="kaupunki" value="Helsinki" />
     <button onclick="haeSaa()">Hae sää</button>
+     <!-- ctrl + k ctrl + c -->
+    <button id="haeSaaPainike">Hae sää</button>
+    <p id="saaYllatys" style="display: none;">&#9729; Pilvipartio etsii säätä!</p>
+
+
     <label for="chartType">Kaavion tyyppi:</label>
     <select id="chartType" onchange="paivitaKaavio()">
         <option value="line">Viiva (Line)</option>
@@ -73,6 +78,10 @@
     </select>
     <canvas id="tempChart" width="400" height="200"></canvas>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    
+    <!-- Haetaan scripti tiedostosta script.js -->
     <script src="script.js"></script>
 </body>
 

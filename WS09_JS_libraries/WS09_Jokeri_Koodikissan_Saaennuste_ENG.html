@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The code cat's scrambled weather forecast</title>
+  <style>
+    /* Center the content horizontally and vertically. */
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 1.25rem;
+      color: #f3f7ff;
+      background: #0c1429;
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Keep the content readable on narrow screens and limit its width to 42rem. */
+    main {
+      width: min(100%, 42rem);
+      box-sizing: border-box;
+      padding: clamp(1.5rem, 6vw, 3.25rem);
+      border: 1px solid #52698c;
+      border-top: 4px solid #b5f977;
+      border-radius: 1rem;
+      background: #172443;
+    }
+
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; }
+
+    /* Reserve space for the forecast, including when short messages are shown. */
+    .forecast {
+      min-height: 3em;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: #0c1429;
+      color: #c7ffa0;
+      font: 1.15rem / 1.5 ui-monospace, monospace;
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      border: 0;
+      border-radius: 0.5rem;
+      color: #0c1429;
+      background: #b5f977;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { background: #d3ffac; }
+
+    /* Make keyboard focus clearly visible. */
+    button:focus-visible { outline: 2px solid #f3f7ff; outline-offset: 4px; }
+
+    /* Keep the text available to screen readers while hiding it visually. */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1><span aria-hidden="true">🐱</span> The code cat's scrambled weather forecast</h1>
+
+    <!-- Hide the animation's random characters from screen readers.
+         Screen readers receive the finished forecast through a separate status message. -->
+    <p id="ennuste" class="forecast" aria-hidden="true">[ FORECAST ENCRYPTED ]</p>
+    <p id="tulos" class="sr-only" role="status"></p>
+
+    <button id="paljasta" type="button">Decode the cat code</button>
+  </main>
+
+  <!-- Load Baffle.js before the page's JavaScript. -->
+  <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
+  <script>
+    // Forecasts are shown in order. Add your own forecast to this list.
+    const ennusteet = [
+      "Scattered showers by day. Meows by night.",
+      "It's raining tuna. Bring a fork when you go out.",
+      "Wind speed: three cats per second.",
+      "It's raining cats and dogs. Bring a bone-brella.",
+      "The sun is shining, but the cats are casting shadows.",
+      "Temperature: 25°C. The cats think it's too hot."
+    ];
+
+    const ennuste = document.getElementById("ennuste");
+    const tulos = document.getElementById("tulos");
+
+    // Create the animation if Baffle.js loaded; otherwise show the forecast directly.
+    const animaatio = typeof baffle === "function" ? baffle("#ennuste") : null;
+
+    // Check whether the user prefers reduced motion when the button is clicked.
+    const vahennettyLiike = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let indeksi = 0;
+
+    document.getElementById("paljasta").addEventListener("click", () => {
+      const viesti = ennusteet[indeksi];
+
+      // Wrap the index to zero after the last forecast.
+      indeksi = (indeksi + 1) % ennusteet.length;
+
+      // Provide the finished forecast to screen readers.
+      tulos.textContent = viesti;
+
+      if (animaatio && !vahennettyLiike.matches) {
+        // Set the new text, scramble it, then reveal it over 900 ms.
+        animaatio.text(() => viesti).start().reveal(900);
+      } else {
+        // Stop any running animation and show the forecast immediately.
+        animaatio?.reveal();
+        ennuste.textContent = viesti;
+      }
+    });
+  </script>
+</body>
+</html>

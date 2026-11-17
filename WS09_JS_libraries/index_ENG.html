@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather chart – OpenWeatherMap</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Workshop 9: JavaScript libraries</h1>
+    <p>External libraries make it easy to add many kinds of functionality to JavaScript applications. There are thousands
+    of libraries, and their possibilities are limited only by your imagination. Here are a few fun libraries to try:</p>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Library</th>
+      <th>Link</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Baffle.js</strong></td>
+      <td><a href="https://camwiegert.github.io/baffle/" target="_blank">https://camwiegert.github.io/baffle/</a></td>
+      <td>A text-effect library that animates text as it is obscured and revealed. Great for eye-catching headings and presentation pages.</td>
+    </tr>
+    <tr>
+      <td><strong>Vanta.js</strong></td>
+      <td><a href="https://www.vantajs.com/" target="_blank">https://www.vantajs.com/</a></td>
+      <td>Easily creates dynamic 3D background effects (such as waves, particles, and birds) for websites. It uses WebGL.</td>
+    </tr>
+    <tr>
+      <td><strong>SweetAlert2</strong></td>
+      <td><a href="https://sweetalert2.github.io/" target="_blank">https://sweetalert2.github.io/</a></td>
+      <td>Creates attractive, easy-to-use pop-up dialogs (alerts, confirmations, and prompts) instead of the browser's default dialogs.</td>
+    </tr>
+    <tr>
+      <td><strong>Leaflet.js</strong></td>
+      <td><a href="https://leafletjs.com/" target="_blank">https://leafletjs.com/</a></td>
+      <td>An open-source mapping library for easily displaying and editing maps (such as OpenStreetMap) in the browser.</td>
+    </tr>
+    <tr>
+      <td><strong>Axios</strong></td>
+      <td><a href="https://axios-http.com/" target="_blank">https://axios-http.com/</a></td>
+      <td>A lightweight library for making HTTP requests (GET, POST, and more). It simplifies working with APIs.</td>
+    </tr>
+    <tr>
+      <td><strong>Chart.js</strong></td>
+      <td><a href="https://www.chartjs.org/" target="_blank">https://www.chartjs.org/</a></td>
+      <td>A simple, popular library for visualizing data with bar, line, pie, and other charts.</td>
+    </tr>
+    <tr>
+      <td><strong>jQuery</strong></td>
+      <td><a href="https://jquery.com/" target="_blank">https://jquery.com/</a></td>
+      <td>A classic library that simplifies DOM manipulation, animations, and AJAX requests. It is less common today, but useful for learning.</td>
+    </tr>
+  </tbody>
+</table>
+
+    <h1>5-day weather forecast</h1>
+<p>The weather app below uses Chart.js to draw temperature charts.</p>
+    <label for="kaupunki">City:</label>
+    <input type="text" id="kaupunki" value="Helsinki" />
+    <button onclick="haeSaa()">Get weather</button>
+     <!-- ctrl + k ctrl + c -->
+    <button id="haeSaaPainike">Get weather</button>
+    <p id="saaYllatys" style="display: none;">&#9729; The cloud crew is checking the weather!</p>
+
+
+    <label for="chartType">Chart type:</label>
+    <select id="chartType" onchange="paivitaKaavio()">
+        <option value="line">Line</option>
+        <option value="bar">Bar</option>
+        <option value="pie">Pie</option>
+    </select>
+    <canvas id="tempChart" width="400" height="200"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Load the script from script.js. -->
+    <script src="script.js"></script>
+</body>
+
+</html>
